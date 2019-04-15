@@ -1,0 +1,12 @@
+.side-widget h4, .sidebar-box h4.widget-title{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+	color: #fff;
+	font-weight: 400;
+	background: #444;
+	text-transform: uppercase;
+}
+/******END - For the new style for titles***/

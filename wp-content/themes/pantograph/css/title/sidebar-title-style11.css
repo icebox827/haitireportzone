@@ -1,0 +1,19 @@
+.side-widget h4 span.sh-text, .sidebar-box h4 span.sh-text{
+	color: #444;
+	line-height: 31px;
+	text-transform: uppercase;
+	font-family: 'Poppins';
+    font-weight: 400;
+	font-size: 16px;
+	position: relative;
+    z-index: 1;
+	display: inline-block;
+	border-bottom: 2px solid #33CCFF;
+}
+.side-widget h4, .sidebar-box h4.widget-title{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 20px;
+    position: relative;
+}
+.side-widget h4 span.sh-text span.sh-text, .sidebar-box h4 span.sh-text span.sh-text{padding: 0; border-bottom: none;}

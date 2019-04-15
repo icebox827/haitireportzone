@@ -1,0 +1,27 @@
+@media only screen and (min-width: 992px) {
+.compact .newmenu .container{
+	display:block;
+	position:fixed;
+	z-index:9000!important;
+	top:0;
+	width:100%;
+	-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	-moz-box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	height: auto;
+}
+.compact .nav-white, .compact .nav-dark, .compact .headerstyleone.headerstyleoneseven .navbar-default {
+	display:block;
+	position:fixed;
+	z-index:9000!important;
+	top:0;
+	width:100%;
+	-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	-moz-box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	height: auto;
+}
+.compact.admin-bar .newmenu .container, .compact.admin-bar .nav-white, .compact.admin-bar .nav-dark, .compact.admin-bar .headerstyleone.headerstyleoneseven .navbar-default {
+	top:30px;
+}
+}

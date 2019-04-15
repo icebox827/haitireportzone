@@ -1,0 +1,56 @@
+h3 b, h4 b { font-weight: 400; }
+.titleh3 b { font-weight: 400; }
+.pull-right .nav-tabs {
+    padding-top: 3px;
+}
+.titleh3.margin-bottom-20{
+	margin-bottom: 23px !important;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+    height: 40px;
+	color: #fff;
+	background: #444;
+	text-transform: uppercase;
+}
+.home_sec_one_addon_1 .pull-right, .home_sec_two_addon_1 .pull-right {
+    margin-top: 3px!important;
+}
+ul.nav-tabs li a {
+    color: #fff;
+}
+ul.nav-tabs li ul li a {
+    color: #444;
+}
+.pull-right .nav-tabs>li.active>a, .pull-right .nav-tabs>li.active>a:focus, .pull-right .nav-tabs>li.active>a:hover {
+    color: #33ccff;
+}
+h3.margin-bottom-15{
+	margin-bottom: 23px !important;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+    height: 40px;
+	color: #fff;
+	background: #444;
+	text-transform: uppercase;
+}
+
+h4.margin-bottom-15{
+	margin-bottom: 23px !important;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+    height: 40px;
+	color: #fff;
+	background: #444;
+	text-transform: uppercase;
+}
+.pull-right .nav-tabs .dropdown-menu {
+    margin-left: -61px;
+    margin-top: 3px;
+}
+/******END - For the new style for titles***/

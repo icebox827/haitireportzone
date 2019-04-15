@@ -1,0 +1,40 @@
+.default-widget h4, .side-widget h4, .sidebar-box h4.widget-title, .pionusnews_instagram h4, .pionusnews_social_counter h4{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    height: 40px;
+	color: #333;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+.inner-content .default-widget h4, .inner-content .side-widget h4, .inner-content .sidebar-box h4.widget-title {
+    line-height: 14px;
+    height: 28px;
+}
+.post-template-single-full-width-image-and-title .inner-content .default-widget h4,
+.post-template-single-full-width-image-and-title .inner-content .side-widget h4, .post-template-single-full-width-image-and-title .inner-content .sidebar-box h4.widget-title {
+    line-height: 28px;
+    height: 36px;
+}
+.default-widget h4:after, .side-widget h4:after, .sidebar-box h4:after, .pionusnews_instagram h4:after {
+    content: "";
+    background: #F26262;
+    width: 40px;
+    height: 2px;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+.default-widget h4:before, .side-widget h4:before, .sidebar-box h4:before, .pionusnews_instagram h4:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    border-left: 0;
+	border-top-color: #F26262;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #F26262;
+}

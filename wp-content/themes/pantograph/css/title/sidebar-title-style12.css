@@ -1,0 +1,39 @@
+.side-widget h4, .sidebar-box h4.widget-title{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    height: 40px;
+	color: #333;
+	font-weight: 400;
+	text-transform: uppercase;
+}
+.inner-content .side-widget h4, .inner-content .sidebar-box h4.widget-title {
+    line-height: 14px;
+    height: 28px;
+}
+.post-template-single-full-width-image-and-title .inner-content .side-widget h4, .post-template-single-full-width-image-and-title .inner-content .sidebar-box h4.widget-title {
+    line-height: 28px;
+    height: 36px;
+}
+.side-widget h4:after, .sidebar-box h4:after {
+    content: "";
+    background: #33CCFF;
+    width: 40px;
+    height: 2px;
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+}
+.side-widget h4:before, .sidebar-box h4:before {
+    content: "";
+    width: 0;
+    height: 0;
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    border-left: 0;
+	border-top-color: #33CCFF;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #33CCFF;
+}

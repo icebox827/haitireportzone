@@ -1,0 +1,818 @@
+@font-face{
+	font-family:'Verdana';
+	src:url('../fonts/Verdana.eot');
+	src:url('../fonts/Verdana.eot') format('embedded-opentype'),
+	url('../fonts/Verdana.woff2') format('woff2'),
+	url('../fonts/Verdana.woff') format('woff'),
+	url('../fonts/Verdana.ttf') format('truetype'),
+	url('../fonts/Verdana.svg') format('svg');
+}
+/*Common CSS*/
+body, p {
+    font-family: 'Verdana';
+    font-size: 15px;
+    line-height: 26px;
+    letter-spacing: normal;
+    font-weight: normal;
+    color: #313030;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Roboto';
+	font-weight: 700;
+}
+h1, .h1 {
+	font-size: 28px;
+	line-height: 34px;
+	letter-spacing: -.01em;
+}
+.category-template-cat_templatesone-column-title-overlay-php .one-column-title-overlay article.style3 .post-excerpt h1.h1 {
+    margin-top: 15px!important;
+    margin-bottom: 0 !important;
+    font-size: 26px !important;
+    line-height: 38px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0;
+    padding-bottom: 10px;
+    padding-right: 20px;
+    color: #333333;
+    font-family: 'Lato',sans-serif;
+}
+.single-post .blog-single p, .single-post .blog-single img{
+	margin-bottom: 25px;
+}
+.single-post .blog-single .post-thumb img{
+	margin-bottom: 0;
+}
+.single-post .blog-single p{
+	margin-top: 0;
+}
+.single-post .blog-single p:last-child{
+	margin-bottom: 10px;
+}
+.single-post .blog-single p, .single-post .blog-single li{
+    font-size: 15px;
+    line-height: 26px;
+	font-family: Verdana,Lato,sans-serif; /*it is better if possible: Verdana, Geneva, sans-serif*/
+	color: #313030;
+	letter-spacing: normal;
+	font-weight: normal;
+}
+.single-post .blog-single blockquote p{
+    font-size: 28px;
+    line-height: 38px !important;
+	font-family: 'Roboto',sans-serif; /*it is better if possible: Verdana, Geneva, sans-serif*/
+	color: #38a6c1;
+	letter-spacing: normal;
+	font-weight: 400;
+	text-transform: uppercase;
+	word-wrap: break-word;
+	margin-top: 25px !important;
+	margin-bottom: 25px !important;
+}
+.single-post .blog-single blockquote p strong, .single-post .blog-single h1 strong, .single-post .blog-single h2 strong,
+ .single-post .blog-single h3 strong,  .single-post .blog-single h4 strong{
+	font-weight: 400 !important;
+}
+.single-post .blog-single h5 {
+	font-family: 'Roboto',sans-serif;
+	font-size: 18px;
+    line-height: 26px;
+    letter-spacing: 0;
+}
+.single-post .blog-single h4 {
+    font-family: 'Lato',sans-serif;
+	font-size: 22px;
+    line-height: 32px;
+    letter-spacing: 0;
+	font-weight: 400 !important;
+}
+.single-post .blog-single h1{
+	margin-top: 30px !important;
+	margin-bottom: 20px !important;
+	font-size: 26px !important;
+    line-height: 38px !important;
+    font-weight: 400 !important;
+	letter-spacing: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+	font-family: 'Lato',sans-serif;
+}
+.single-post .single-full-width-image-and-title .blog-single h1.h1,
+.post-template-default.single-post .blog-single h1.h1, .post-template-single-general.single-post .blog-single h1.h1{
+	margin-top: 0px !important;
+}
+.post-template-single-general.single-post .blog-single.has-post-thumbnail h1.h1 {
+    margin-top: 25px !important;
+    margin-bottom: 0px !important;
+	padding-bottom: 0px !important;
+}
+.single-post .blog-single .single-meta img, .single-post .blog-single img.the_ftimage {
+    margin-bottom: 0;
+}
+.single-post .blog-single h2{
+	margin-top: 30px !important;
+	margin-bottom: 20px !important;
+	font-size: 26px !important;
+    line-height: 38px !important;
+	font-weight: 400 !important;
+	font-family: 'Lato',sans-serif;
+}
+.single-post .blog-single h3{
+	margin-top: 26px !important;
+	margin-bottom: 16px !important;
+	font-size: 22px !important;
+    line-height: 30px !important;
+	font-weight: 400 !important;
+	font-family: 'Lato',sans-serif;
+}
+.single-post .blog-single h1.h1{
+	margin-top: 15px!important;
+	margin-bottom: 0 !important;
+	font-size: 26px !important;
+    line-height: 38px !important;
+    font-weight: 400 !important;
+	letter-spacing: 0;
+    padding-bottom: 10px;
+    padding-right: 20px;
+	color: #333333;
+	font-family: 'Lato',sans-serif;
+}
+.post-template-singel-one-column-title-overlay-transparent-php .one-column-title-overlay .blog-single h1.h1{
+	margin-top: 15px!important;
+	margin-bottom: 0 !important;
+	letter-spacing: 0;
+    padding-bottom: 10px;
+    padding-right: 20px;
+	color: #fff;
+}
+.post-template-singel-one-column-title-overlay-transparent-php .one-column-title-overlay-transparent .blog-single h1.video_h1{
+	margin-top: 15px!important;
+	margin-bottom: 0 !important;
+	letter-spacing: 0;
+    padding-bottom: 10px;
+    padding-right: 20px;
+	color: #333;
+}
+.single-post .blog-single h1.h1.text-white{
+	color: #fff;
+}
+.single .blog-single p a {
+    font-weight: 400 !important;
+}
+.single-post .blog-single h1.h1,
+.single-post .single-image-and-title h1.h1.text-white,
+.single-post .one-column-title-overlay .blog-single h1,
+.single-post .one-column-title-overlay-transparent article.style3 .post-excerpt h1.h1,
+.single-post .single-without-sidebar article.style3.single .h1,
+.single-post .single-full-width-image-and-title article.style3.single .h1,
+.post-template-single-general.single-post .blog-single.has-post-thumbnail h1.h1,
+.blog-single h1.no-single-imageh1{
+    font-family: 'Roboto';
+    font-weight: 700 !important;
+    font-size: 36px !important;
+    line-height: 42px !important;
+    letter-spacing: -.01em !important;
+}
+.single-post .single-without-sidebar article.style3.single .h1,
+.single-post .single-full-width-image-and-title article.style3.single .h1{
+	font-size: 42px !important;
+    line-height: 48px !important;
+}
+.archive .section-head h2 {
+    font-weight: 700;
+	font-family: 'Roboto';
+	font-size: 34px;
+    line-height: 35px;
+    letter-spacing: -.01em;
+	color: #333;
+}
+/*END - Common CSS*/
+
+.meta span, .meta span a, .loadmorebtn, .sidebar-box .tagcloud a{
+	font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+	font-size: 12px !important;
+	font-family: 'Rajdhani' !important;
+	margin-bottom: 10px;
+	line-height: 30px;
+}
+.slick-slide .meta span{
+	margin-bottom: 0;
+}
+.small-title.cat, .meta .small-title.cat{
+	font-weight: 700 !important;
+    text-transform: uppercase;
+	font-size: 12px !important;
+	font-family: 'Rajdhani' !important;
+	padding: 0 10px;
+    line-height: 25px;
+	letter-spacing: 0;
+	margin-bottom: 10px;
+}
+.category-template-cat_templatesone-column-content-left-right-php .small-title.cat,
+.blog-classic-layout .small-title.cat{
+	margin-bottom: 15px;
+}
+.small-title-no-vc.cat, .post-thumb .small-title.cat {
+	margin-top: 10px;
+}
+.post-thumb .small-title.cat .small-title-no-vc.cat {
+	margin-top: 0;
+}
+.category .small-title-no-vc.cat, .pionusblog .small-title-no-vc.cat, .single .blog-single .small-title-no-vc.cat{
+	line-height: 18px;
+	margin-top: 0;
+}
+.small-title.cat a, .meta .small-title.cat a, .small-title.cat a:hover, .meta .small-title.cat a:hover,
+.header-top-menubar .topbar-date, .mobile_header_top .topbar-date, .megamenu > .dropdown-menu .header-post .date,
+.single .blog-single .small-title-no-vc.cat a,
+.single .blog-single .small-title-no-vc.cat a:hover,
+.category .three-column-image-overlay .small-title-no-vc.cat a{
+	font-weight: 700 !important;
+    text-transform: uppercase;
+	font-size: 12px !important;
+	font-family: 'Rajdhani' !important;
+	letter-spacing: 0;
+}
+.category .three-column-image-overlay .small-title-no-vc.cat{
+	padding: 1px 8px 3px 8px;
+}
+h4 b, h3 b, .titleh3 b, h4 .sh-text, .side-widget h4, .sidebar-box h4.widget-title,
+footer .default-widget h4 span.sh-text, footer .side-widget h4 span.sh-text{
+    font-weight: 600 !important;
+	font-family: 'Poppins' !important;
+    letter-spacing: -0.03em !important;
+}
+footer .default-widget h4 span.sh-text, footer .side-widget h4 span.sh-text, footer h5.text-white, .footer-content h5{
+	font-size: 16px;
+	letter-spacing: 0.08em !important;
+	font-weight: 600 !important;
+}
+.title_style_12 .inner-content .side-widget h4, .title_style_12 .inner-content .sidebar-box h4.widget-title,
+.title_style_12 .inner-content .side-widget h4 .sh-text, .title_style_12 footer .default-widget h4 span.sh-text, .title_style_12 footer .side-widget h4 span.sh-text{
+	line-height: 14px !important;
+}
+.post_block_29 .br-title, .header-top-menubar .list-inline a {
+	font-weight: 500 !important;
+    text-transform: uppercase;
+	font-family: 'Roboto' !important;
+	letter-spacing: -.01em !important;
+}
+.header-top-menubar .list-inline a {
+	font-size: 11px;
+}
+.newsticker ul{
+	padding-top: 2px;
+}
+@supports (-moz-appearance:none) {
+.newsticker ul {
+    padding-top: 0px;
+}
+}
+.side-newsletter p, .side-newsletter span, .side-newsletter input{
+    font-family: 'Poppins' !important;
+	font-weight: 500;
+	color: #1b1d25;
+}
+.side-newsletter button, .side-social a span{
+	font-family: 'Poppins' !important;
+}
+
+.post-thumb .post-excerpt h3.h1, .post-thumb .post-excerpt h3.h1 a,
+.post-thumb .post-excerpt h5, .post-thumb .post-excerpt h5 a,
+.post_block_32 .col-md-12 .style3.article-home .post-thumb .post-excerpt h3 a,
+.post_block_32 .col-md-6 .style3.article-home .post-thumb .post-excerpt h3 a,
+.post-excerpt h4 a,
+.post-excerpt h5 a,
+.post-excerpt h3 a,
+.titleh3 .nav.nav-tabs li a,
+.post_block_23 .list-posts a,
+.recentposts li a,
+.side-widget li a{
+	font-weight: 700 !important;
+	font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+	text-transform: none;
+    color: #1b1d25; /*CAN BE CHANGED*/
+}
+.post_block_32 .col-md-12 .style3.article-home .post-thumb .post-excerpt h3 a{
+	color: #fff;
+}
+.recentposts li a, .recentposts li,
+.side-widget li a, .side-widget li{
+	line-height: 25px;
+}
+.side-widget li {
+    font-size: 15px;
+    padding: 8px 0;
+}
+.titleh3 .nav.nav-tabs li a, .side-widget li a{
+	font-weight: 600 !important;
+	font-size: 14px;
+}
+.post_block_29 .newsticker{
+	font-family: 'Roboto' !important;
+    color: #666;
+    font-weight: 400;
+}
+.post-thumb .post-excerpt h3.h1, .post-thumb .post-excerpt h3.h1 a,
+.post-thumb .post-excerpt h5, .post-thumb .post-excerpt h5 a,
+.post-thumb .post-excerpt h3, .post-thumb .post-excerpt h3 a{
+	color: #fff;
+}
+/*FOR col-md-6 TEXT ON IMAGE*/
+.post-thumb .post-excerpt h3, .post-thumb .post-excerpt h3 a, .col-md-8 .post-excerpt h3, .col-md-8 .post-excerpt h3 a,
+.vc_col-sm-8 .slick-slide .post-thumb .post-excerpt h3.h1.text-white,
+.vc_col-sm-8 .slick-slide .post-thumb .post-excerpt h3.h1.text-white a,
+body.category .top_post_block_incat .col-md-6 .post-thumb .post-excerpt h3, body.category .top_post_block_incat .col-md-6 .post-thumb .post-excerpt h3 a,
+body .pionusblog .top_post_block_incat .col-md-6 .post-thumb .post-excerpt h3, body .pionusblog .top_post_block_incat .col-md-6 .post-thumb .post-excerpt h3 a
+{
+	font-size: 30px !important;
+	line-height: 35px !important;
+}
+body.category .post-thumb .post-excerpt h3, body.category .post-thumb .post-excerpt h3 a,
+body.category .top_post_block_incat.custom_class2 .post-thumb .post-excerpt h3, body.category .top_post_block_incat.custom_class2 .post-thumb .post-excerpt h3 a,
+body.category .top_post_block_incat.custom_class5 .post-thumb .post-excerpt h3, body.category .top_post_block_incat.custom_class5 .post-thumb .post-excerpt h3 a,
+body.category .top_post_block_incat.custom_classdefault .post-thumb .post-excerpt h3, body.category .top_post_block_incat.custom_classdefault .post-thumb .post-excerpt h3 a,
+body .pionusblog .post-thumb .post-excerpt h3, body .pionusblog .post-thumb .post-excerpt h3 a,
+body .pionusblog .top_post_block_incat.custom_class2 .post-thumb .post-excerpt h3, body .pionusblog .top_post_block_incat.custom_class2 .post-thumb .post-excerpt h3 a,
+body .pionusblog .top_post_block_incat.custom_class5 .post-thumb .post-excerpt h3, body .pionusblog .top_post_block_incat.custom_class5 .post-thumb .post-excerpt h3 a,
+body .pionusblog .top_post_block_incat.custom_classdefault .post-thumb .post-excerpt h3, body .pionusblog .top_post_block_incat.custom_classdefault .post-thumb .post-excerpt h3 a{
+	font-size: 22px !important;
+	line-height: 28px !important;
+}
+body.category .style3 .post-thumb .post-excerpt h3, body.category .style3 .post-thumb .post-excerpt h3 a,
+body .pionusblog .style3 .post-thumb .post-excerpt h3, body .pionusblog .style3 .post-thumb .post-excerpt h3 a{
+	font-size: 32px !important;
+    line-height: 38px !important;
+}
+/*FOR col-md-12 TEXT ON IMAGE*/
+.vc_col-sm-12 .post-thumb .post-excerpt h3, .vc_col-sm-12 .post-thumb .post-excerpt h3 a{
+	font-size: 34px !important;
+	line-height: 40px !important;
+	color: #fff;
+}
+/*FOR col-md-3 TEXT ON IMAGE*/
+.post_block_22 .post-thumb .post-excerpt h5, .post_block_22 .post-thumb .post-excerpt h5 a,
+.post_block_15 .post-thumb .post-excerpt h3, .post_block_15 .post-thumb .post-excerpt h3 a{
+	font-size: 17px !important;
+	line-height: 22px !important;
+	color: #fff;
+}
+
+.vc_col-sm-12 .col-md-3 .post-thumb.fontsizing .post-excerpt h3, .vc_col-sm-12 .col-md-3 .post-thumb.fontsizing .post-excerpt h3 a,
+.vc_col-sm-12 .col-md-3 .post-thumb.fontsizing .post-excerpt h5, .vc_col-sm-12 .col-md-3 .post-thumb.fontsizing .post-excerpt h5 a,
+.vc_col-sm-6 .col-md-6 .post-thumb.fontsizing .post-excerpt h3, .vc_col-sm-6 .col-md-6 .post-thumb.fontsizing .post-excerpt h3 a,
+.vc_col-sm-6 .col-md-6 .post-thumb.fontsizing .post-excerpt h5, .vc_col-sm-6 .col-md-6 .post-thumb.fontsizing .post-excerpt h5 a{
+	font-size: 17px !important;
+	line-height: 22px !important;
+	color: #fff;
+}
+/*FOR col-md-4 TEXT ON IMAGE*/
+.featured-posts-widget .post-thumb .post-excerpt h3, .featured-posts-widget .post-thumb .post-excerpt h3 a,
+.post-thumb .post-excerpt h5, .post-thumb .post-excerpt h5 a, .vc_col-sm-4 .slick-slide .post-thumb .post-excerpt h3 a,
+.post_block_30 .post-thumb .post-excerpt h3, .post_block_30 .post-thumb .post-excerpt h3 a,
+.post_block_12 .post-thumb .post-excerpt h3, .post_block_12 .post-thumb .post-excerpt h3 a,
+.thetabpanel .tab-content .post-thumb .post-excerpt h3, .thetabpanel .tab-content .post-thumb .post-excerpt h3 a,
+.vc_col-sm-4 .post_block_32 .col-md-12 .style3.article-home .post-thumb .post-excerpt h3,
+.vc_col-sm-4 .post_block_32 .col-md-12 .style3.article-home .post-thumb .post-excerpt h3 a,
+.post_block_8 .style5 .post-thumb .post-excerpt h3,
+.post_block_8 .style5 .post-thumb .post-excerpt h3 a{
+	font-size: 20px !important;
+	line-height: 25px !important;
+	color: #fff;
+}
+
+.vc_col-sm-12 .col-md-4 .post-thumb.fontsizing .post-excerpt h3, .vc_col-sm-12 .col-md-4 .post-thumb.fontsizing .post-excerpt h3 a,
+.vc_col-sm-12 .col-md-4 .post-thumb.fontsizing .post-excerpt h5, .vc_col-sm-12 .col-md-4 .post-thumb.fontsizing .post-excerpt h5 a,
+.vc_col-sm-8 .col-md-6 .post-thumb.fontsizing .post-excerpt h3, .vc_col-sm-8 .col-md-6 .post-thumb.fontsizing .post-excerpt h3 a,
+.vc_col-sm-8 .col-md-6 .post-thumb.fontsizing .post-excerpt h5, .vc_col-sm-8 .col-md-6 .post-thumb.fontsizing .post-excerpt h5 a{
+	font-size: 20px !important;
+	line-height: 25px !important;
+}
+/*FOR Thumbnail sise IMAGE*/
+.wpb_column .wpb_wrapper .mini-posts .post-excerpt h5, .wpb_column .wpb_wrapper .mini-posts .post-excerpt h5 a, .post_block_23 .list-posts a, .recentposts li a, .side-widget .toggle-view li a{
+	font-weight: 500 !important;
+	font-size: 14px !important;
+	line-height: 20px !important;
+}
+.wpb_column .post_block_31 .post-thumb .post-excerpt h5, .wpb_column .post_block_31 .post-thumb .post-excerpt h5 a{
+	font-weight: 600 !important;
+	font-size: 17px !important;
+	line-height: 22px !important;
+}
+.vc_col-sm-4 .post_block_32 .col-md-6 .style3.article-home .post-thumb .post-excerpt h3, .vc_col-sm-4 .post_block_32 .col-md-6 .style3.article-home .post-thumb .post-excerpt h3 a{
+	font-weight: 500 !important;
+	font-size: 15px !important;
+	line-height: 20px !important;
+}
+.vc_col-sm-4 .post_block_32 .col-md-12 .style3.article-home .post-thumb .post-excerpt h3 a,
+.single .blog-single .small-title-no-vc.cat a, .single .blog-single .small-title-no-vc.cat a:hover{
+	font-weight: 600 !important;
+}
+/*FOR col-md-4 TEXT NOT-ON IMAGE*/
+.post-excerpt h4, .post-excerpt h4 a, .side-widget .article-home .post-excerpt h3, .side-widget .article-home .post-excerpt h3 a{
+	font-size: 22px !important;
+	line-height: 30px !important;
+}
+.post-excerpt h4, .side-widget .article-home .post-excerpt h3{
+	margin-top: 10px;
+}
+/*FOR col-md-3 TEXT NOT-ON IMAGE*/
+.post-excerpt h5, .post-excerpt h5 a, .col-md-3 h4, .col-md-3 h4 a, .post_block_26 .col-md-3 h4.title2, .post_block_26 .col-md-3 h4.title2 a{
+	font-size: 14px !important;
+	line-height: 20px !important;
+	font-weight: 500 !important;
+}
+.post-excerpt h5, .col-md-3 h4{
+	margin-top: 5px;
+}
+.mini-posts .post-excerpt h5{
+	margin-top: 0;
+}
+article .post-excerpt p, .megamenu > .dropdown-menu .header-post p,
+.category-template-cat_templatesone-column-title-overlay-php article.style3 p,
+.category-template-cat_templatesone-column-content-left-right-php .post-excerpt p,
+.category-template-cat_templatesone-column-title-overlay-transparent-php article.style3 p,
+.category-template-cat_templatesone-column-title-overlay-php article.style3 p,
+.category-template-cat_templatestwo-column-general-php .post-excerpt p,
+.page-template-blog-templates .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) p,
+.page-template-blog-templates .blog-pinterest-layout article .post-excerpt:not(.custom_class_top_posts) p,
+.page-template-blog-templates .blog-photo-layout article .post-excerpt:not(.custom_class_top_posts) p,
+.page-template-blog-templates .blog-photo-layout-alt article .post-excerpt:not(.custom_class_top_posts) p,
+.page-template-blog-templates .blog-classic-layout .post-excerpt:not(.custom_class_top_posts) p,
+.page-template-blog-templates .blog-one-column-standard .col-md-8 article p,
+.page-template-blog-templates .blog-one-column-transparent  .col-md-8 article p,
+.page-template-blog-templates .blog-simple article .post-excerpt:not(.custom_class_top_posts) p,
+.page-template-blog-templates .blog-two-columns-standard .post-excerpt:not(.custom_class_top_posts) p,
+.page-template-blog-templates .blog-small-photo article.img_article .post-excerpt:not(.custom_class_top_posts) p,
+.page-template-blog-templates .blog-small-photo .video_details  p{
+    font-family: 'Roboto' !important;
+	color: #666;
+    font-weight: 400;
+    font-size: 13px !important;
+    line-height: 20px !important;
+    text-align: left;
+    margin-bottom: 10px;
+}
+.footer-head p{
+	font-family: 'Roboto' !important;
+	font-size: 13px !important;
+	line-height: 22px !important;
+	color: #999;
+	font-weight: 400;
+	text-align: left;
+}
+/*Apply this in the post_block_16 thumbnail image div
+style="padding-left:0;"
+*/
+/*Exception Cases*/
+.vc_col-sm-6 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-6 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-6 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-6 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-6 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-6 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a{
+	font-size: 26px !important;
+	line-height: 32px !important;
+	color: #fff !important;
+}
+.vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a{
+	font-size: 30px !important;
+	line-height: 35px !important;
+	color: #fff !important;
+}
+
+.vc_col-sm-12 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-12 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-12 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-12 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a{
+	font-size: 34px !important;
+	line-height: 40px !important;
+	color: #fff !important;
+}
+.wpb_column .wpb_wrapper .post_block_12 .post-thumb .post-excerpt h3, .wpb_column .wpb_wrapper .post_block_12 .post-thumb .post-excerpt h3 a{
+	font-size: 26px !important;
+	line-height: 32px !important;
+}
+/*END Exception Cases*/
+
+.yamm-content .header-post h4, .yamm-content .header-post h4 a, .widget_nav_menu h2{
+	font-family: 'Roboto' !important;
+	font-size: 14px !important;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+	font-weight: 500 !important;
+}
+header .navbar-nav:not(.leftside):not(.navbar-right) > li > a{
+    font-family: 'Roboto' !important;
+    font-size: 13px !important;
+	line-height: 20px;
+    font-weight: 500 !important;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.header7 .navbar-default .navbar-nav.leftside > li > a, .header .navbar-default .navbar-nav.navbar-right > li > a{
+	font-family: 'Roboto' !important;
+	letter-spacing: 0.5px;
+	padding: 15px 10px;
+    text-transform: capitalize;
+}
+.megamenu > .dropdown-menu a, .dropdown-v1 .dropdown-menu>li>a {
+    font-family: 'Roboto' !important;
+    line-height: 36px;
+    font-size: 13px !important;
+	font-weight: 400;
+}
+.megamenu > .dropdown-menu a{
+	font-weight: 500;
+}
+.footer-social li a{
+	font-family: 'Roboto' !important;
+    line-height: 28px;
+    font-size: 14px !important;
+	font-weight: 400;
+}
+.footer-bottom p{
+	font-weight: 500 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+	font-size: 12px;
+}
+footer .footer-links li a {
+    line-height: 37px;
+    display: initial;
+    font-weight: 500 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+    color: #fff;
+    text-transform: none;
+}
+footer .footer-links li{
+	font-size: 14px !important;
+    line-height: 20px !important;
+	padding: 10px 0;
+	color: #fff;
+}
+footer .footer-links li:first-child, .footer-social li:first-child{
+	padding-top: 0;
+}
+.post_block_2 .beforethumbnail148, .post_block_2 .thumbnail148 {
+    height: 200px;
+}
+/*Can be used for bigger post excerpt
+.main_blog .generalstyle, .main_blog .beforegeneralstyle, .style2.main_blog .generalstyle{
+	height: 300px;
+}*/
+article.style4 h5.title_video a {
+    font-weight: 700;
+}
+.one-column-title-overlay article.style3 a,
+.one-column-title-overlay-transparent article.style3 a{
+    font-weight: 700;
+}
+.single .small-title-no-vc.cat{margin-top: 0;}
+
+.three-column-image-overlay .post-excerpt:not(.custom_class_top_posts) h4 a{
+font-weight: 700 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+	color: #464646;
+    font-size: 20px !important;
+    line-height: 28px !important;
+    font-style: normal;
+	text-transform: none;
+}
+.three-column-image-overlay .post-excerpt:not(.custom_class_top_posts) h4{
+	margin-bottom: 10px;
+}
+
+/*All Category Templates Titles*/
+.category .one-column-general article .post-excerpt:not(.custom_class_top_posts) h3,
+.category .one-column-general article .post-excerpt:not(.custom_class_top_posts) h3 a,
+.category .one-column-large-general article .post-excerpt:not(.custom_class_top_posts) h4,
+.category .one-column-large-general article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .one-column-title-overlay article .post-excerpt:not(.custom_class_top_posts) h1,
+.category .one-column-title-overlay article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.category .one-column-title-overlay-transparent article .post-excerpt:not(.custom_class_top_posts) h1,
+.category .one-column-title-overlay-transparent article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.category .one-column-image-title article .post-excerpt:not(.custom_class_top_posts) h1,
+.category .one-column-image-title article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.category .one-column-content-left-right .post-excerpt:not(.custom_class_top_posts) h3,
+.category .one-column-content-left-right .post-excerpt:not(.custom_class_top_posts) h3 a,
+.category .category-one-column-style-12 article .post-excerpt:not(.custom_class_top_posts) h4,
+.category .category-one-column-style-12 article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .two-column-image-title .video_details h5.title_video,
+.category .two-column-image-title .video_details h5.title_video a,
+.category .section-head h2{
+	font-size: 30px !important;
+    line-height: 35px !important;
+	font-weight: 700 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+    text-transform: none;
+}
+.category .three-column-fullwidth article .post-excerpt:not(.custom_class_top_posts) h4,
+.category .three-column-fullwidth article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .three-column-masonry-style-13 .post-excerpt:not(.custom_class_top_posts) h4,
+.category .three-column-masonry-style-13 .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .two-column-general .post-excerpt:not(.custom_class_top_posts) h4,
+.category .two-column-general .post-excerpt:not(.custom_class_top_posts) h4 a{
+	font-size: 26px !important;
+    line-height: 32px !important;
+	font-weight: 700 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+    text-transform: none;
+}
+.category .three-column-image-overlay article .post-excerpt:not(.custom_class_top_posts) h4,
+.category .three-column-image-overlay article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .three-column-image-title-overlay article .post-excerpt:not(.custom_class_top_posts) h3,
+.category .three-column-image-title-overlay article .post-excerpt:not(.custom_class_top_posts) h3 a,
+.category .three-column-image-title-overlay .video_details h5.title_video,
+.category .three-column-image-title-overlay .video_details h5.title_video a,
+.category .two-column-image-title article.img_article .post-excerpt:not(.custom_class_top_posts) h3,
+.category .two-column-image-title article.img_article .post-excerpt:not(.custom_class_top_posts) h3 a{
+	font-size: 22px !important;
+    line-height: 28px !important;
+	font-weight: 700 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+    text-transform: none;
+}
+.category-template-cat_templatesthree-column-image-overlay-php .post-excerpt:not(.custom_class_top_posts) span.date,
+.category-template-cat_templatesthree-column-image-overlay-php .post-excerpt:not(.custom_class_top_posts) span.comment{
+	font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-size: 12px !important;
+    font-family: 'Rajdhani' !important;
+}
+/*END All Category Templates Titles*/
+/*All Blog Templates Titles*/
+.page-template-blog-templates .blog-classic-layout .post-excerpt:not(.custom_class_top_posts) h3,
+.page-template-blog-templates .blog-classic-layout .post-excerpt:not(.custom_class_top_posts) h3 a,
+.page-template-blog-templates .blog-one-column-standard article .post-excerpt:not(.custom_class_top_posts) h1,
+.page-template-blog-templates .blog-one-column-standard article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.page-template-blog-templates .blog-one-column-transparent article .post-excerpt:not(.custom_class_top_posts) h1,
+.page-template-blog-templates .blog-one-column-transparent article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.page-template-blog-templates .blog-photo-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates .blog-photo-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates .blog-photo-layout-alt article .post-excerpt:not(.custom_class_top_posts) h1,
+.page-template-blog-templates .blog-photo-layout-alt article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.page-template-blog-templates .blog-simple article .post-excerpt:not(.custom_class_top_posts) h3,
+.page-template-blog-templates .blog-simple article .post-excerpt:not(.custom_class_top_posts) h3 a,
+.pionusblog .section-head h2{
+	font-size: 30px !important;
+    line-height: 35px !important;
+	font-weight: 700 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+    text-transform: none;
+}
+.page-template-blog-templates.page-template-blog-grid-layout .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates.page-template-blog-grid-layout .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates.page-template-blog-grid-layout-two .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates.page-template-blog-grid-layout-two .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates .blog-pinterest-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates .blog-pinterest-layout article .post-excerpt:not(.custom_class_top_posts) h4 a{
+	font-size: 26px !important;
+    line-height: 32px !important;
+	font-weight: 700 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+    text-transform: none;
+}
+.page-template-blog-templates .blog-pinterest-layout .post-excerpt:not(.custom_class_top_posts) span.date,
+.page-template-blog-templates .blog-pinterest-layout .post-excerpt:not(.custom_class_top_posts) span.comment{	
+	font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    font-size: 12px !important;
+    font-family: 'Rajdhani' !important;
+}
+.page-template-blog-templates .blog-pinterest-layout .post-excerpt:not(.custom_class_top_posts) span.small-title-no-vc.cat a,
+.page-template-blog-templates .blog-pinterest-layout .post-excerpt:not(.custom_class_top_posts) span.small-title-no-vc.cat a:hover{
+	font-weight: 700 !important;
+    text-transform: uppercase;
+    font-size: 12px !important;
+    font-family: 'Rajdhani' !important;
+    letter-spacing: 0;
+	color: #fff;
+}
+.page-template-blog-templates.page-template-blog-grid-layout-four .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates.page-template-blog-grid-layout-four .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates.page-template-blog-grid-layout-three .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates.page-template-blog-grid-layout-three .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates .blog-two-columns-standard .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates .blog-two-columns-standard .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates .blog-small-photo article.img_article .post-excerpt:not(.custom_class_top_posts) h3,
+.page-template-blog-templates .blog-small-photo article.img_article .post-excerpt:not(.custom_class_top_posts) h3 a,
+.page-template-blog-templates .blog-small-photo .video_details h5.title_video,
+.page-template-blog-templates .blog-small-photo .video_details h5.title_video a,
+.page-template-blog-templates .blog-two-columns-standard .video_details h5.title_video,
+.page-template-blog-templates .blog-two-columns-standard .video_details h5.title_video a{
+	font-size: 22px !important;
+    line-height: 28px !important;
+	font-weight: 700 !important;
+    font-family: 'Roboto' !important;
+    letter-spacing: -.01em !important;
+    text-transform: none;
+}
+/*END All Blog Templates Titles*/
+/*For Mobile Sites*/
+@media only screen and (max-width: 767px){
+.vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-8 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-12 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-12 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.vc_col-sm-12 .post-thumb:not(.fontsizing) .post-excerpt h3.h1, .vc_col-sm-12 .post-thumb:not(.fontsizing) .post-excerpt h3.h1 a,
+.wpb_column .wpb_wrapper .post_block_12 .post-thumb .post-excerpt h3, .wpb_column .wpb_wrapper .post_block_12 .post-thumb .post-excerpt h3 a,
+.category .one-column-general article .post-excerpt:not(.custom_class_top_posts) h3,
+.category .one-column-general article .post-excerpt:not(.custom_class_top_posts) h3 a,
+.category .one-column-large-general article .post-excerpt:not(.custom_class_top_posts) h4,
+.category .one-column-large-general article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .one-column-title-overlay article .post-excerpt:not(.custom_class_top_posts) h1,
+.category .one-column-title-overlay article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.category .one-column-title-overlay-transparent article .post-excerpt:not(.custom_class_top_posts) h1,
+.category .one-column-title-overlay-transparent article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.category .one-column-image-title article .post-excerpt:not(.custom_class_top_posts) h1,
+.category .one-column-image-title article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.category .one-column-content-left-right .post-excerpt:not(.custom_class_top_posts) h3,
+.category .one-column-content-left-right .post-excerpt:not(.custom_class_top_posts) h3 a,
+.category .category-one-column-style-12 article .post-excerpt:not(.custom_class_top_posts) h4,
+.category .category-one-column-style-12 article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .two-column-image-title .video_details h5.title_video,
+.category .two-column-image-title .video_details h5.title_video a,
+.category .section-head h2,
+.category .three-column-fullwidth article .post-excerpt:not(.custom_class_top_posts) h4,
+.category .three-column-fullwidth article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .three-column-masonry-style-13 .post-excerpt:not(.custom_class_top_posts) h4,
+.category .three-column-masonry-style-13 .post-excerpt:not(.custom_class_top_posts) h4 a,
+.category .two-column-general .post-excerpt:not(.custom_class_top_posts) h4,
+.category .two-column-general .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates .blog-classic-layout .post-excerpt:not(.custom_class_top_posts) h3,
+.page-template-blog-templates .blog-classic-layout .post-excerpt:not(.custom_class_top_posts) h3 a,
+.page-template-blog-templates .blog-one-column-standard article .post-excerpt:not(.custom_class_top_posts) h1,
+.page-template-blog-templates .blog-one-column-standard article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.page-template-blog-templates .blog-one-column-transparent article .post-excerpt:not(.custom_class_top_posts) h1,
+.page-template-blog-templates .blog-one-column-transparent article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.page-template-blog-templates .blog-photo-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates .blog-photo-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates .blog-photo-layout-alt article .post-excerpt:not(.custom_class_top_posts) h1,
+.page-template-blog-templates .blog-photo-layout-alt article .post-excerpt:not(.custom_class_top_posts) h1 a,
+.page-template-blog-templates .blog-simple article .post-excerpt:not(.custom_class_top_posts) h3,
+.page-template-blog-templates .blog-simple article .post-excerpt:not(.custom_class_top_posts) h3 a,
+.pionusblog .section-head h2,
+.page-template-blog-templates.page-template-blog-grid-layout .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates.page-template-blog-grid-layout .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates.page-template-blog-grid-layout-two .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates.page-template-blog-grid-layout-two .blog-grid-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.page-template-blog-templates .blog-pinterest-layout article .post-excerpt:not(.custom_class_top_posts) h4,
+.page-template-blog-templates .blog-pinterest-layout article .post-excerpt:not(.custom_class_top_posts) h4 a,
+.vc_col-sm-12 .post-thumb .post-excerpt h3, .vc_col-sm-12 .post-thumb .post-excerpt h3 a,
+body.category .style3 .post-thumb .post-excerpt h3, body.category .style3 .post-thumb .post-excerpt h3 a,
+body .pionusblog .style3 .post-thumb .post-excerpt h3, body .pionusblog .style3 .post-thumb .post-excerpt h3 a,
+.post-thumb .post-excerpt h3, .post-thumb .post-excerpt h3 a, .col-md-8 .post-excerpt h3, .col-md-8 .post-excerpt h3 a,
+.vc_col-sm-8 .slick-slide .post-thumb .post-excerpt h3.h1.text-white,
+.vc_col-sm-8 .slick-slide .post-thumb .post-excerpt h3.h1.text-white a,
+body.category .top_post_block_incat .col-md-6 .post-thumb .post-excerpt h3, body.category .top_post_block_incat .col-md-6 .post-thumb .post-excerpt h3 a,
+body .pionusblog .top_post_block_incat .col-md-6 .post-thumb .post-excerpt h3, body .pionusblog .top_post_block_incat .col-md-6 .post-thumb .post-excerpt h3 a,
+.archive .section-head h2,
+.single-post .single-without-sidebar article.style3.single .h1,
+.single-post .single-full-width-image-and-title article.style3.single .h1,
+.single-post .blog-single h1.h1,
+.single-post .single-image-and-title h1.h1.text-white,
+.single-post .one-column-title-overlay .blog-single h1,
+.single-post .one-column-title-overlay-transparent article.style3 .post-excerpt h1.h1,
+.single-post .single-without-sidebar article.style3.single .h1,
+.single-post .single-full-width-image-and-title article.style3.single .h1,
+.post-template-single-general.single-post .blog-single.has-post-thumbnail h1.h1,
+.single-post .blog-single blockquote p,
+.category-template-cat_templatesone-column-title-overlay-php .one-column-title-overlay article.style3 .post-excerpt h1.h1,
+.post_block_22 .post-thumb .post-excerpt h5, .post_block_22 .post-thumb .post-excerpt h5 a, .post_block_15 .post-thumb .post-excerpt h3,
+.post_block_15 .post-thumb .post-excerpt h3 a, .post-excerpt h5, .post-excerpt h5 a, .col-md-3 h4, .col-md-3 h4 a,
+.post_block_26 .col-md-3 h4.title2, .post_block_26 .col-md-3 h4.title2 a,
+.post-excerpt h5, .post-excerpt h5 a, .col-md-3 h4, .col-md-3 h4 a, .post_block_26 .col-md-3 h4.title2, .post_block_26 .col-md-3 h4.title2 a,
+.wpb_column .wpb_wrapper .mini-posts .post-excerpt h5, .wpb_column .wpb_wrapper .mini-posts .post-excerpt h5 a, .post_block_23 .list-posts a,
+.recentposts li a, .side-widget .toggle-view li a
+{
+	font-weight: 700 !important;
+	font-size: 20px !important;
+	line-height: 25px !important;
+}
+.post_block_22 article.style4 .post-excerpt {
+    padding: 10px 20px 40px 20px;
+}
+.post-excerpt h5, .col-md-3 h4 {
+    margin-bottom: 20px;
+}
+footer .widget_pionusnews_popular_posts.post-excerpt h5, footer .widget_pionusnews_popular_posts.post-excerpt h5 a,
+footer .default-widget .post-excerpt h5 a, footer .side-widget .post-excerpt h5 a, footer.pionus-footer6 .side-widget .post-excerpt h5 a{
+	font-weight: 500 !important;
+	font-size: 15px !important;
+	line-height: 18px !important;
+}
+}
+/*END For Mobile Sites*/

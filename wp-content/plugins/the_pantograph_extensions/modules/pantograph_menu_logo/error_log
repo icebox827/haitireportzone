@@ -1,0 +1,1 @@
+[29-Nov-2017 10:16:07 America/Chicago] PHP Fatal error:  Call to undefined function add_action() in /home2/reader87/public_html/wp/letter/wp-content/plugins/the_pantograph_extensions/modules/pantograph_menu_logo/pantograph_menu_logo.php on line 316

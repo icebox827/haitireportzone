@@ -1,0 +1,88 @@
+@font-face{
+	font-family:'Verdana';
+	src:url('../fonts/Verdana.eot');
+	src:url('../fonts/Verdana.eot') format('embedded-opentype'),
+	url('../fonts/Verdana.woff2') format('woff2'),
+	url('../fonts/Verdana.woff') format('woff'),
+	url('../fonts/Verdana.ttf') format('truetype'),
+	url('../fonts/Verdana.svg') format('svg');
+}
+.POST-METAS{
+	font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+	font-size: 12px;
+	font-family: 'Rajdhani';
+	margin-bottom: 15px;
+	line-height: 30px;
+	/*if THIS IS CATEGORY WITH BACKGROUND
+	padding: 0 10px;
+    line-height: 25px;
+	letter-spacing: 0;
+	*/
+}
+	
+.POST-BLOCK-HEADINGS {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+	font-family: 'Poppins';
+	line-height: 22px !important;
+    letter-spacing: -0.03em !important;
+}
+
+.POST-TITLES{
+	font-family: 'Poppins';
+    font-weight: 700;
+	/*FOR Thumbnail Size images the font weight is 600
+	*/
+    font-size: 18px; 
+	/*FOR col-md-3 13px, FOR col-md-4 18px, FOR col-md-8 30px, FOR col-md-6 30px #THESE SIZES ARE FOR TEXT ON IMAGE
+	  FOR col-md-3 13px, FOR col-md-4 22px, FOR col-md-8 30px, FOR col-md-6 30px #THESE SIZES ARE FOR TEXT NOT-On IMAGE
+	  FOR thumbnail size images 13px
+	*/
+    line-height: 22px !important; 
+	/*FOR col-md-3 20px, FOR col-md-4 22px, FOR col-md-8 35px, FOR col-md-6 35px #THESE SIZES ARE FOR TEXT ON IMAGE
+	  FOR col-md-3 20px, FOR col-md-4 30px, FOR col-md-8 35px, FOR col-md-6 35px #THESE SIZES ARE FOR TEXT NOT-On IMAGE
+	  FOR thumbnail size images 20px
+	*/
+    letter-spacing: -0.03em !important;
+	text-transform: none;
+    color: #1b1d25; /*CAN BE CHANGED*/
+	margin-bottom: 10px;
+}
+.post-excerpt p{
+    font-family: 'Roboto';
+	color: #666;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 22px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+.FULL-POST-BLOCK-BELOW-IMAGE{
+	margin-top: 15px;
+}
+
+.MEGA-MENUS-POST-TITLES{
+	font-family: 'Roboto';
+	font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+    font-style: normal;
+	font-weight: 600;
+}
+.MAIN-MENU-PARENT {
+    font-family: 'Roboto';
+    font-size: 12px;
+	line-height: 1;
+    font-weight: 600;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+.MAIN-MENU-SUB {
+    font-family: 'Roboto';
+    line-height: 1;
+    font-size: 12px;
+	font-weight: 400;
+}

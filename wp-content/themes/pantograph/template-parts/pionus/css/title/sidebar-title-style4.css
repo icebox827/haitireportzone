@@ -1,0 +1,18 @@
+.default-widget h4, .side-widget h4, .sidebar-box h4.widget-title, .pionusnews_instagram h4, .pionusnews_social_counter h4{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+    border: 1px solid rgba(0,0,0,.06);
+	border-top: 4px solid #F26262;
+	color: #444;
+	font-weight: 400;
+	background: #fff;
+	text-transform: uppercase;
+}
+footer .default-widget h4, footer .side-widget h4, footer .sidebar-box h4.widget-title, footer .pionusnews_instagram h4,
+footer .widget_pionusnews_popular_posts .side-widget h4{
+	padding: 0;
+	border-top: 0 !important;
+}

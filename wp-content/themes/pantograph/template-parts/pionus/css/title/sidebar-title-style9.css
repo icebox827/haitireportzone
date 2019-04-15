@@ -1,0 +1,30 @@
+.default-widget h4 span.sh-text, .side-widget h4 span.sh-text, .sidebar-box h4 span.sh-text, .pionusnews_instagram h4 span.sh-text, .pionusnews_social_counter h4 span.sh-text{
+	background-color: #F26262; /*shouold be changable*/
+	color: #fff;
+	line-height: 31px;
+	text-transform: uppercase;
+	padding: 0 20px 0 12px;
+	font-family: 'Poppins';
+    font-weight: 400;
+	font-size: 14px;
+	position: relative;
+    z-index: 1;
+	display: inline-block;
+	border-radius: 3px 3px 3px 0;
+}
+.default-widget h4 span.sh-text:before, .side-widget h4 span.sh-text:before, .pionusnews_instagram h4 span.sh-text:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 0;
+    height: 0;
+	border-top-color: #F26262;
+    border-top: 10px solid #F26262;
+    border-right: 10px solid transparent;
+}
+.default-widget h4 span.sh-text span.sh-text, .side-widget h4 span.sh-text span.sh-text, .sidebar-box h4 span.sh-text span.sh-text,
+.pionusnews_instagram h4 span.sh-text span.sh-text, .pionusnews_social_counter h4 span.sh-text span.sh-text{padding: unset;}
+.default-widget h4 span.sh-text span.sh-text:before, .side-widget h4 span.sh-text span.sh-text:before, .sidebar-box h4 span.sh-text span.sh-text:before,
+.pionusnews_instagram h4 span.sh-text span.sh-text:before{display: none;}

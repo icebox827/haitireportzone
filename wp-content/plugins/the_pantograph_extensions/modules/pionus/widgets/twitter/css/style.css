@@ -1,0 +1,73 @@
+.icon-tweets {
+    display: block;
+    text-align: center;
+    margin-bottom: 12px;
+    font-size: 32px;
+    color: #F26262;
+    margin-top: -10px;
+}
+.tweet-desc {
+    padding-bottom: 20px;
+    height: 120px;
+    overflow: hidden;
+}
+p.tweet-time {
+    text-align: center;
+    padding-bottom: 20px;
+}
+.slider-links {
+    float: none;
+    display: block;
+}
+.tie-slider-nav {
+    margin: 0;
+    opacity: 1;
+    float: right;
+    position: static;
+    width: auto;
+}
+.tie-slider-nav li {
+    padding: 0;
+    border: 0;
+    margin-bottom: 0;
+    margin-left: 5px;
+    float: right;
+	line-height: 25px;
+}
+.tie-slider-nav li span {
+    width: 25px;
+    height: 25px;
+    border: 1px solid rgba(0,0,0,.1);
+    line-height: 23px;
+    position: relative;
+    top: 0;
+    cursor: pointer;
+    font-size: 14px;
+	text-align: center;
+}
+.tie-slider-nav li span:hover{
+    background-color: #F26262;
+	color: #020202!important;
+}
+.slider-links a.button {
+    width: auto;
+    position: relative;
+    background-color: #F26262;
+    color: #fff;
+    padding: 1px 10px;
+    margin-right: 10px;
+    font-weight: 400;
+    font-size: 12px;
+    display: inline-block;
+    text-align: center;
+    line-height: 23px;
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    vertical-align: middle;
+    transition: .3s;
+    border-radius: 2px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}

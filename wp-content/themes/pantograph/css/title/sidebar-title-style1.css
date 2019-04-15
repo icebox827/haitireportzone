@@ -1,0 +1,33 @@
+.side-widget h4, .sidebar-box h4.widget-title{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 20px;
+	font-weight: 400;
+    border: 1px solid rgba(0,0,0,.06);
+	color: #33CCFF;
+	text-transform: uppercase;
+}
+.side-widget h4 span.sh-text:before, .sidebar-box h4 span.sh-text:before{
+    height: 100%;
+    top: 0;
+    margin-top: 0;
+    background: transparent;
+	content: '';
+    position: absolute;
+    left: 0;
+    width: 5px;
+	display: inline-block;
+}
+.side-widget h4:before, .sidebar-box h4.widget-title:before{
+    height: 100%;
+    top: 0;
+    margin-top: 0;
+    background: #33CCFF;
+	content: '';
+    position: absolute;
+    left: 0;
+    width: 5px;
+	display: inline-block;
+}

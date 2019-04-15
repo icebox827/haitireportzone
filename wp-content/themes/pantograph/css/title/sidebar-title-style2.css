@@ -1,0 +1,19 @@
+.side-widget h4, .sidebar-box h4.widget-title{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+    border-bottom: 4px solid #33CCFF;
+	color: #fff;
+	font-weight: 400;
+	background: #444;
+	text-transform: uppercase;
+}
+.sh-text a.rsswidget {
+    color: #fff;
+}
+.sh-text a.rsswidget:hover {
+    color: #33CCFF;
+}
+/******END - For the new style for titles***/

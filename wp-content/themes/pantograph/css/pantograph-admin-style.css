@@ -1,0 +1,74 @@
+.wp-admin .panto-page-welcome p input[type=radio]{
+	margin: -4px 4px 0 0;
+}
+.wp-admin p.p_radio_options{
+	max-width: 70%;
+	float: left;
+}
+.wp-admin .panto-page-welcome p.submit{ 
+	max-width: 25%;
+	float: right;
+}
+.wp-admin .panto-page-welcome .wp-badge {
+    background-image: url(../img/panicon.png);
+    background-color: #0473aa;
+}
+.wp-badge {
+    background: url(images/w-logo-white.png?ver=20160308) center 25px no-repeat #0073aa;
+    -webkit-background-size: 42px 42px;
+    background-size: 42px 42px;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 600;
+    margin: 5px 0 0;
+    padding-top: 85px;
+    height: 40px;
+    display: inline-block;
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.2);
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+}
+.wp-admin .thered{
+	color: red;
+}
+.wp-admin .center{
+	text-align:center;
+}
+.wp-admin .mtop50{
+	margin-top: 50px;
+}
+.wp-admin .mbottom50{
+	margin-bottom: 50px;
+}
+.wp-admin  .mtop20{
+	margin-top: 20px;
+}
+.wp-admin .mbottom20{
+	margin-bottom: 20px;
+}
+.about-wrap .first-para {
+    margin: 0.5em 0 0.5em 0;
+    color: #555d66;
+	font-weight: 400;
+    line-height: 1.6em;
+    font-size: 17px;
+}
+ul.the-sites li {
+    margin-bottom: 12px;
+	margin-right: 10px;
+    display: inline-table;
+}
+.wp-admin .notes{
+	font-size: 13px;
+}
+.wp-core-ui .panto-page-welcome .button-primary.customized{
+    line-height: 23px;
+    height: 25px;
+    padding: 0 7px 1px;
+}
+.customwrapper{
+	background: #fff;
+}
+#setting-error-pantograph a{
+	display: none !important;
+}

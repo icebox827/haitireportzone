@@ -1,0 +1,58 @@
+h3 b, h4 b { font-weight: 400; }
+.titleh3 b { font-weight: 400; }
+.titleh3.margin-bottom-20{
+	margin-bottom: 23px !important;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+	border: 1px solid rgba(0,0,0,.06);
+	border-top: 4px solid #F26262;
+    height: 40px;
+	color: #444;
+	background: #fff;
+	text-transform: uppercase;
+}
+.home_sec_one_addon_1 .pull-right, .home_sec_two_addon_1 .pull-right {
+    margin-top: 3px!important;
+}
+ul.nav-tabs li a {
+    color: #444;
+}
+ul.nav-tabs li ul li a {
+    color: #444;
+}
+.pull-right .nav-tabs>li.active>a, .pull-right .nav-tabs>li.active>a:focus, .pull-right .nav-tabs>li.active>a:hover {
+    color: #F26262;
+}
+h3.margin-bottom-15{
+	margin-bottom: 23px !important;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+	border: 1px solid rgba(0,0,0,.06);
+	border-top: 4px solid #F26262;
+    height: 40px;
+	color: #444;
+	background: #fff;
+	text-transform: uppercase;
+}
+
+h4.margin-bottom-15{
+	margin-bottom: 23px !important;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+	border: 1px solid rgba(0,0,0,.06);
+	border-top: 4px solid #F26262;
+    height: 40px;
+	color: #444;
+	background: #fff;
+	text-transform: uppercase;
+}
+.nav-tabs .dropdown-menu {
+    margin-left: -58px;
+}
+/******END - For the new style for titles***/

@@ -1,0 +1,15 @@
+.default-widget h4, .side-widget h4, .sidebar-box h4.widget-title, .pionusnews_instagram h4, .pionusnews_social_counter h4{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+	color: #fff;
+	font-weight: 400;
+	background: #444;
+	text-transform: uppercase;
+}
+footer .default-widget h4, footer .side-widget h4, footer .sidebar-box h4.widget-title, footer .pionusnews_instagram h4, .pionusnews_social_counter h4{
+    padding: 0;
+}
+/******END - For the new style for titles***/

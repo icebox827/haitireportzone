@@ -1,0 +1,13 @@
+.side-widget h4, .sidebar-box h4.widget-title{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 36px;
+    position: relative;
+    padding: 0 0 0 15px;
+    border: 1px solid rgba(0,0,0,.06);
+	border-top: 4px solid #33CCFF;
+	color: #444;
+	font-weight: 400;
+	background: #fff;
+	text-transform: uppercase;
+}

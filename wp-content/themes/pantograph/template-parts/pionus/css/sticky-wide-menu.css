@@ -1,0 +1,23 @@
+@media only screen and (min-width: 992px) {
+.compact .newmenu, .compact .nav-white, .compact .nav-dark, .compact .headerstyleone.headerstyleoneseven .navbar-default {
+	display:block;
+	position:fixed;
+	z-index:9000!important;
+	top:0;
+	left:0;
+	width:100%;
+	-webkit-box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	-moz-box-shadow:0 1px 4px rgba(0, 0, 0, .1);
+	height: auto;
+}
+.compact .nav-white{
+	background-color: #fff;
+}
+.compact .nav-dark {
+	background-color: #1e2022;
+}
+.compact.admin-bar .newmenu, .compact.admin-bar .nav-white, .compact.admin-bar .nav-dark, .compact.admin-bar .headerstyleone.headerstyleoneseven .navbar-default {
+	top:30px;
+}
+}

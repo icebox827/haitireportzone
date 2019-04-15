@@ -1,0 +1,43 @@
+.side-widget h4 span.sh-text, .sidebar-box h4 span.sh-text{
+	background-color: #33CCFF; /*shouold be changable*/
+	color: #fff;
+	line-height: 31px;
+	text-transform: uppercase;
+	padding: 0 12px;
+	font-family: 'Poppins';
+    font-weight: 400;
+	font-size: 14px;
+	position: relative;
+    z-index: 1;
+	display: inline-block;
+}
+.side-widget h4, .sidebar-box h4.widget-title{
+	margin-bottom: 23px;
+	font-size: 16px;
+    line-height: 20px;
+    position: relative;
+}
+.side-widget h4 span.sh-text:after, .sidebar-box h4 span.sh-text:after{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 12px;
+    display: inline-block;
+    background: #fff;
+    right: -11px;
+}
+.side-widget h4:after, .sidebar-box h4.widget-title:after{
+    height: 100%;
+    top: 0;
+    margin-top: 0;
+    background: url('../../img/titlestripe.png');
+    opacity: .13;
+	content: '';
+    position: absolute;
+    left: 0;
+    width: 100%;
+	display: inline-block;
+}
+
+.side-widget h4 span.sh-text span.sh-text, .sidebar-box h4 span.sh-text span.sh-text{padding: 0;}
+.side-widget h4 span.sh-text span.sh-text:after, .sidebar-box h4 span.sh-text span.sh-text:after{display: none;}

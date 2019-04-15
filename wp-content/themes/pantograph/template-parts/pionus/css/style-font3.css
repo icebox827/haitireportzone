@@ -1,0 +1,287 @@
+@font-face{
+	font-family:'Verdana';
+	src:url('../fonts/Verdana.eot');
+	src:url('../fonts/Verdana.eot') format('embedded-opentype'),
+	url('../fonts/Verdana.woff2') format('woff2'),
+	url('../fonts/Verdana.woff') format('woff'),
+	url('../fonts/Verdana.ttf') format('truetype'),
+	url('../fonts/Verdana.svg') format('svg');
+}
+h3 b, h4 b, .titleh3 b, .titleh3, .widget-title{
+	font-family: 'Lato',sans-serif;
+}
+body, p {
+    font-family: 'Lato';
+    font-weight: 400;
+    font-size: 15px;
+	line-height: 1.6;
+	letter-spacing: 0;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: 'Roboto Condensed';
+	font-weight: 700;
+}
+.post-excerpt h4 a {
+    font-family: 'Roboto Condensed';
+    font-weight: 700;
+    line-height: 22px;
+    font-size: 18px;
+    text-align: inherit;
+}
+
+h3 b, h4 b {
+    font-family: 'Roboto Condensed';
+    font-weight: 700;
+    line-height: 26px;
+    font-size: 20px;
+    letter-spacing: 0.4px;
+	display: inline-block;
+    padding: 4px 17px 4px 0;
+    text-transform: none;
+	position: relative;
+    z-index: 1;
+}
+
+.side-widget h4 span.sh-text, .sidebar-box h4 span.sh-text{
+    z-index: 1;
+	display: inline-block;
+    padding: 4px 17px 4px 0;
+	position: relative;
+	font-size: 20px;
+}
+/******For the straight line after titles***/
+h3.margin-bottom-15{
+	margin-bottom: 23px;
+	position: relative;
+}
+h4.margin-bottom-15{
+	margin-bottom: 23px;
+	position: relative;
+}
+.side-widget h4, .sidebar-box h4.widget-title{
+	margin-bottom: 23px;
+	position: relative;
+}
+
+/******END - For the straight line after titles***/
+.post-excerpt h5 a, .side-widget p a, .megamenu > .dropdown-menu .header-post a{
+    font-family: 'Roboto Condensed';
+    font-weight: 700;
+    line-height: 17px;
+    font-size: 15px;
+    text-align: inherit;
+    text-transform: none;
+}
+.list-posts a {
+    font-family: 'Roboto Condensed';
+    font-weight: 500;
+    line-height: 20px;
+    font-size: 15px;
+    text-align: inherit;
+    text-transform: none;
+}
+.post-excerpt p, .megamenu > .dropdown-menu .header-post p {
+    font-family: 'Lato';
+    font-weight: 400;
+    line-height: 20px;
+    font-size: 14px;
+    text-align: inherit;
+    text-transform: initial;
+}
+.meta, .meta a, .meta span, .megamenu > .dropdown-menu .header-post date {
+    font-family: 'Lato';
+    font-weight: 400;
+    font-size: 12px;
+    text-transform: none;
+	letter-spacing: 0.2px;
+}
+.post-excerpt h3 a {
+	font-family: 'Roboto Condensed';
+    font-weight: 700;
+    line-height: 22px;
+    font-size: 18px;
+    text-align: inherit;
+    text-transform: none;
+}
+.side-widget h4, .sidebar-box h4.widget-title {
+	font-weight: 700;
+	margin: -2px 0 14px;
+}
+.post-excerpt h3.h1.text-white {
+    font-family: 'Roboto Condensed';
+    font-weight: 700;
+    font-size: 26px;
+	line-height: 32px;
+    text-align: inherit;
+    text-transform: none;
+	margin: 2px 0 4px;
+}
+.post-excerpt h3.text-white {
+    font-family: 'Roboto Condensed';
+    font-weight: 700;
+    font-size: 24px;
+	line-height: 30px;
+    text-align: inherit;
+    text-transform: none;
+	margin: 2px 0 4px;
+}
+.small-title.cat{
+	font-family: 'Roboto Condensed';
+	font-weight: 700;
+}
+.footer-links li a, .footer-head p{
+	font-family: 'Roboto Condensed';
+	font-weight: 400;
+}
+.footer-content h5{
+	font-family: 'Roboto Condensed';
+	font-weight: 500;
+}
+.footer-links li, .footer-head p{
+	font-size: 16px;
+}
+/***********Menu**********/
+.header .navbar-default .navbar-nav > li > a{
+	font-family: 'Roboto Condensed';
+    font-weight: 400;
+    font-size: 14px;
+    text-align: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.megamenu > .dropdown-menu a, .dropdown-v1 .dropdown-menu > li > a{
+	font-family: 'Lato';
+    font-weight: 400;
+    font-size: 14px;
+}
+/***********END Menu*****/
+.single-post .blog-single p, .single-post .blog-single img{
+	margin-bottom: 25px;
+}
+.single-post .blog-single .post-thumb img{
+	margin-bottom: 0;
+}
+.single-post .blog-single p:last-child{
+	margin-bottom: 10px;
+}
+.single-post .blog-single p, .single-post .blog-single li{
+    font-size: 15px;
+    line-height: 26px;
+	font-family: Verdana,Lato,sans-serif; /*it is better if possible: Verdana, Geneva, sans-serif*/
+	color: #313030;
+	letter-spacing: normal;
+	font-weight: normal;
+}
+.single-post .blog-single blockquote p{
+    font-size: 28px;
+    line-height: 38px !important;
+	font-family: 'Roboto Condensed',sans-serif; /*it is better if possible: Verdana, Geneva, sans-serif*/
+	color: #38a6c1;
+	letter-spacing: normal;
+	font-weight: 400;
+	text-transform: uppercase;
+	word-wrap: break-word;
+	margin-top: 25px !important;
+	margin-bottom: 25px !important;
+}
+.single-post .blog-single blockquote p strong, .single-post .blog-single h1 strong, .single-post .blog-single h2 strong,
+ .single-post .blog-single h3 strong,  .single-post .blog-single h4 strong, .single-post .blog-single h5 strong{
+	font-weight: 400 !important;
+}
+.single-post .blog-single h5 {
+	font-family: 'Roboto Condensed',sans-serif;
+}
+.single-post .blog-single h4 {
+    font-family: 'Roboto Condensed',sans-serif;
+	font-size: 22px;
+    line-height: 32px;
+    letter-spacing: 0;
+	font-weight: 400 !important;
+}
+.single-post .blog-single h1{
+	margin-top: 30px !important;
+	margin-bottom: 20px !important;
+	font-size: 26px !important;
+    line-height: 38px !important;
+    font-weight: 400 !important;
+	letter-spacing: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+	font-family: 'Roboto Condensed',sans-serif;
+}
+.single-post .blog-single h2{
+	margin-top: 30px !important;
+	margin-bottom: 20px !important;
+	font-size: 26px !important;
+    line-height: 38px !important;
+	font-weight: 400 !important;
+	font-family: 'Roboto Condensed',sans-serif;
+}
+.single-post .blog-single h3{
+	margin-top: 26px !important;
+	margin-bottom: 16px !important;
+	font-size: 22px !important;
+    line-height: 30px !important;
+	font-weight: 400 !important;
+	font-family: 'Roboto Condensed',sans-serif;
+}
+.single-post .blog-single h1.h1{
+	margin-top: 15px!important;
+	margin-bottom: 0 !important;
+	font-size: 26px !important;
+    line-height: 38px !important;
+    font-weight: 400 !important;
+	letter-spacing: 0;
+    padding-bottom: 10px;
+    padding-right: 20px;
+	color: #333333;
+	font-family: 'Roboto Condensed',sans-serif;
+}
+.post-template-singel-one-column-title-overlay-transparent-php .one-column-title-overlay .blog-single h1.h1{
+	margin-top: 15px!important;
+	margin-bottom: 0 !important;
+	letter-spacing: 0;
+    padding-bottom: 10px;
+    padding-right: 20px;
+	color: #fff;
+}
+.single .blog-single p a {
+    font-weight: 400 !important;
+}
+.wpb_column .recentposts li a {
+    font-size: 15px;
+    font-weight: 500;
+	word-spacing: 1px;
+	letter-spacing: 0;
+    text-transform: none;
+    margin: 5px 10px 5px 0 !important;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    font-family: 'Roboto Condensed',sans-serif;
+}
+.wpb_column #recentcomments li.recentcomments a{
+	line-height: 19px;
+	font-style: italic;
+    font-size: 14px;
+    font-weight: 500;
+	color: #111;
+	font-family: 'Roboto Condensed',sans-serif;
+	margin-left: 0;
+}
+.wpb_column #recentcomments .recentcomments{
+	font-size: 12px;
+	line-height: 19px;
+    color: #444;
+	font-weight: 400;
+	font-family: 'Roboto Condensed',sans-serif;
+}
+.wpb_widgetised_column .side-widget #toggle-view > li {
+    border-bottom: 0px;
+	font-size: 15px;
+    font-weight: 500;
+	word-spacing: 1px;
+	letter-spacing: 0;
+    text-transform: none;
+	font-family: 'Roboto Condensed',sans-serif;
+	color: #313030;
+}

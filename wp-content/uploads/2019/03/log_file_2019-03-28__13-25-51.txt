@@ -1,0 +1,183 @@
+
+---Downloaded files---
+The import files for: News Magazine Demo were successfully downloaded!
+Initial max execution time = 600
+Files info:
+Site URL = http://localhost/haitireportzone
+Data file = C:\wamp64\www\haitireportzone/wp-content/themes/pantograph/framework/demo-content/letter6/demo-content.xml
+Widget file = C:\wamp64\www\haitireportzone/wp-content/themes/pantograph/framework/demo-content/letter6/widgets.wie
+Customizer file = C:\wamp64\www\haitireportzone/wp-content/themes/pantograph/framework/demo-content/letter6/customizer.dat
+Redux files:
+not defined!
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+[ERROR] Failed to import "33-696x385" (Media)
+
+
+------
+New AJAX call!
+
+
+------
+New AJAX call!
+
+
+---Importing widgets---
+Sidebars Widgets : 
+
+Mailchimp Sign-Up Form - Newsletter - Imported
+Pantograph Twitter Tweets - Our Latest Tweets - Imported
+PantoGraph Popular Posts - What&#039;s Hot - Imported
+Pantograph Social Counter Widget - Follow Us - Imported
+
+Header Right Advertisement : 
+
+Text - No Title - Imported
+
+Footer Widgets : 
+
+Navigation Menu - LIFE - Imported
+Navigation Menu - MONEY - Imported
+Navigation Menu - TECH - Imported
+Navigation Menu - TRAVEL - Imported
+Navigation Menu - SPORTS - Imported
+Navigation Menu - FOLLOW US - Imported
+
+Footer Style 2 : 
+
+Navigation Menu - World News - Imported
+Navigation Menu - Technology - Imported
+Navigation Menu - Entertainment - Imported
+Navigation Menu - Tours &amp; Travel - Imported
+Navigation Menu - Life Style - Imported
+
+Footer Style 3 : 
+
+Navigation Menu - Popular Category - Imported
+Navigation Menu - Tours &amp; Travel - Imported
+
+Footer Style 4 : 
+
+Navigation Menu - World - Imported
+Navigation Menu - Technology - Imported
+Navigation Menu - Tv Shows - Imported
+
+Footer Style 5 : 
+
+Meta - No Title - Imported
+Navigation Menu - Tours - Imported
+Navigation Menu - Popular News - Imported
+Navigation Menu - Entertainment - Imported
+Navigation Menu - World - Imported
+
+Footer Style 6 : 
+
+Navigation Menu - Travel - Imported
+Navigation Menu - Politics - Imported
+
+Another Footer Widgets : 
+
+Navigation Menu - Sports - Imported
+Navigation Menu - Travel - Imported
+Navigation Menu - Tech - Imported
+
+Footer Social Links : 
+
+Navigation Menu - Follow Us - Imported
+
+black gallery : 
+
+Gallery - No Title - Imported
+
+Home New Sidebar : 
+
+Pantograph Social Counter Widget - Follow Us - Imported
+PantoGraph Subscription - Subscribe - Imported
+
+Home One : 
+
+Pantograph Social Counter Widget - Follow Us - Imported
+Mailchimp Sign-Up Form - Newsletter - Imported
+PantoGraph Popular Posts - Most Popular - Imported
+
+Home One Bottom : 
+
+PantoGraph Popular Posts - No Title - Imported
+
+Home One Bottom Last : 
+
+Tag Cloud - Tags - Imported
+
+Home One Middle : 
+
+PantoGraph Video Posts - Featured Videos - Imported
+
+Home One Top : 
+
+PantoGraph Featured Posts - FEATURED POST - Imported
+Tag Cloud - No Title - Imported
+PantoGraph Popular Posts - RECENT POST - Imported
+
+Home Social &amp; Newsletter : 
+
+Pantograph Social Counter Widget - Follow Us - Imported
+Mailchimp Sign-Up Form - Newsletter - Imported
+
+Home Three Bottom : 
+
+Tag Cloud - No Title - Imported
+
+Home Three Top : 
+
+Gallery - No Title - Imported
+
+Title Right Sidebar : 
+
+PantoGraph Featured Posts - FEATURED POST - Imported
+Tag Cloud - No Title - Imported
+PantoGraph Popular Posts - RECENT POST - Imported
+
+white featured : 
+
+PantoGraph Video Posts - NEW VIDEOS - Imported
+
+
+
+---Importing customizer settings---
+Customizer settings import finished!
+
+---pt-ocdc/after_import---
+

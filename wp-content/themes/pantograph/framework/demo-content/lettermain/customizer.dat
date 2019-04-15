@@ -1,0 +1,6 @@
+a:4:{s:8:"template";s:10:"pantograph";s:4:"mods";a:3:{i:0;b:0;s:18:"nav_menu_locations";a:15:{s:19:"latter_primary_menu";i:32;s:18:"latter_menu_footer";i:37;s:18:"letter_menu_footer";i:37;s:38:"letter_primary_menu_header_style_three";i:0;s:37:"letter_primary_menu_header_style_four";i:0;s:37:"letter_primary_menu_header_style_five";i:0;s:36:"letter_primary_menu_header_style_six";i:0;s:38:"letter_primary_menu_header_style_seven";i:0;s:38:"letter_primary_menu_header_style_eight";i:0;s:36:"letter_primary_menu_header_style_two";i:32;s:19:"letter_primary_menu";i:32;s:23:"thegazette_primary_menu";i:32;s:22:"thegazette_menu_footer";i:36;s:22:"pantograph_menu_footer";i:37;s:23:"pantograph_primary_menu";i:32;}s:18:"custom_css_post_id";i:738;}s:7:"options";a:2:{s:9:"site_icon";s:1:"0";s:23:"nav_menus_created_posts";a:0:{}}s:6:"wp_css";s:79:"/*
+You can add your own CSS here.
+
+Click the help icon above to learn more.
+*/
+";}

@@ -1,0 +1,51 @@
+<wpml-config>
+  <admin-texts>
+    <key name="pantograph_theme_options">
+      <key name="logo_url"/>
+      <key name="footer_logo_url"/>
+      <key name="pantograph_favicon"/>
+      <key name="pantograph_no_post_img"/>
+      <key name="pantograph_readmore_label"/>
+      <key name="pantograph_single_post_style"/>
+      <key name="pantograph_category_style"/>
+      <key name="pantograph_show_author_on_single_post"/>
+      <key name="pantograph_title_style"/>
+      <key name="pantograph_sidebar_style"/>
+      <key name="img_top_cat_bg_style"/>
+      <key name="custom_color"/>
+      <key name="pantograph_font_style"/>
+      <key name="pantograph_header_style"/>
+      <key name="pantograph_on_breadcrumbs"/>
+      <key name="search_on_off"/>
+      <key name="pantograph_header_topbar"/>
+      <key name="topbar_menu_item1_name"/>
+      <key name="topbar_menu_item1_link"/>
+      <key name="topbar_menu_item2_name"/>
+      <key name="topbar_menu_item2_link"/>
+      <key name="topbar_menu_item3_name"/>
+      <key name="topbar_menu_item3_link"/>
+	  <key name="topbar_menu_item4_name"/>
+      <key name="topbar_menu_item4_link"/>
+	  <key name="topbar_menu_item5_name"/>
+      <key name="topbar_menu_item5_link"/>
+	  <key name="topbar_menu_item6_name"/>
+      <key name="topbar_menu_item6_link"/>
+	  <key name="topbar_menu_item7_name"/>
+      <key name="topbar_menu_item7_link"/>
+	  <key name="topbar_menu_item8_name"/>
+      <key name="topbar_menu_item8_link"/>
+      <key name="social_facebook"/>
+      <key name="social_twitter"/>
+      <key name="social_linkedin"/>
+      <key name="social_googleplus"/>
+      <key name="social_instagram"/>
+      <key name="social_utube"/>
+      <key name="pantograph_footer_style"/>
+      <key name="search_on_off_footer"/>
+      <key name="pantograph_subscribe_text"/>
+      <key name="pantograph_footer_short_desc"/>
+      <key name="copy_text"/>
+      <key name="pantograph_preloader"/>
+    </key>
+  </admin-texts>
+</wpml-config>

@@ -1,0 +1,14 @@
+a:4:{s:8:"template";s:10:"pantograph";s:4:"mods";a:3:{i:0;b:0;s:18:"nav_menu_locations";a:4:{s:23:"pionusnews_primary_menu";i:59;s:21:"pionusnews_right_menu";N;s:20:"pionusnews_left_menu";N;s:22:"pionusnews_menu_footer";i:56;}s:18:"custom_css_post_id";i:1415;}s:7:"options";a:2:{s:9:"site_icon";s:1:"0";s:23:"nav_menus_created_posts";a:0:{}}s:6:"wp_css";s:305:".side-social a {
+    float: none !important;
+	display: inline-block !important;
+	width: 31.3333% !important;
+	padding: 15px 0 0;
+	margin: 0 1px 5px;
+}
+@media only screen and (min-width: 768px) and (max-width: 968px){
+.side-social a {
+    width: 30.3333% !important;
+	padding: 10px 0 0;
+	height: 100px;
+}
+}";}
