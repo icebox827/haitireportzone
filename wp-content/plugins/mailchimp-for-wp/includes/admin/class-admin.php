@@ -15,11 +15,6 @@ class MC4WP_Admin
     protected $plugin_file;
 
     /**
-    * @var MC4WP_MailChimp
-    */
-    protected $mailchimp;
-
-    /**
     * @var MC4WP_Admin_Messages
     */
     protected $messages;
@@ -44,12 +39,10 @@ class MC4WP_Admin
     *
     * @param MC4WP_Admin_Tools $tools
     * @param MC4WP_Admin_Messages $messages
-    * @param MC4WP_MailChimp      $mailchimp
     */
-    public function __construct(MC4WP_Admin_Tools $tools, MC4WP_Admin_Messages $messages, MC4WP_MailChimp $mailchimp)
+    public function __construct(MC4WP_Admin_Tools $tools, MC4WP_Admin_Messages $messages)
     {
         $this->tools = $tools;
-        $this->mailchimp = $mailchimp;
         $this->messages = $messages;
         $this->plugin_file = plugin_basename(MC4WP_PLUGIN_FILE);
         $this->ads = new MC4WP_Admin_Ads();
@@ -126,9 +119,11 @@ class MC4WP_Admin
         do_action('mc4wp_admin_' . $action);
 
         // redirect back to where we came from
-        $redirect_url = ! empty($_POST['_redirect_to']) ? $_POST['_redirect_to'] : remove_query_arg('_mc4wp_action');
-        wp_redirect($redirect_url);
-        exit;
+        $redirect_url = isset($_REQUEST['_redirect_to']) ? $_REQUEST['_redirect_to'] : remove_query_arg('_mc4wp_action');
+        if ($redirect_url) {
+            wp_redirect($redirect_url);
+            exit;
+        }
     }
 
     /**
@@ -210,7 +205,8 @@ class MC4WP_Admin
     public function renew_lists_cache()
     {
         // try getting new lists to fill cache again
-        $lists = $this->mailchimp->fetch_lists();
+        $mailchimp = new MC4WP_MailChimp();
+        $lists = $mailchimp->refresh_lists();
 
         if (! empty($lists)) {
             $this->messages->flash(__('Success! The cached configuration for your Mailchimp lists has been renewed.', 'mailchimp-for-wp'));
@@ -262,7 +258,8 @@ class MC4WP_Admin
 
         // if API key changed, empty Mailchimp cache
         if ($settings['api_key'] !== $current['api_key']) {
-            $this->mailchimp->empty_cache();
+            $mailchimp = new MC4WP_MailChimp();
+            $mailchimp->refresh_lists();
         }
 
 
@@ -294,6 +291,7 @@ class MC4WP_Admin
         $opts = mc4wp_get_options();
         $page = $this->tools->get_plugin_page();
         $suffix = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
+        $mailchimp = new MC4WP_MailChimp();
 
         // css
         wp_register_style('mc4wp-admin', MC4WP_PLUGIN_URL . 'assets/css/admin-styles' . $suffix . '.css', array(), MC4WP_VERSION);
@@ -303,17 +301,16 @@ class MC4WP_Admin
         wp_register_script('es5-shim', MC4WP_PLUGIN_URL . 'assets/js/third-party/es5-shim.min.js', array(), MC4WP_VERSION);
         $wp_scripts->add_data('es5-shim', 'conditional', 'lt IE 9');
 
-        // TODO: eventually get rid of jQuery here
-        wp_register_script('mc4wp-admin', MC4WP_PLUGIN_URL . 'assets/js/admin' . $suffix . '.js', array( 'jquery', 'es5-shim' ), MC4WP_VERSION, true);
-        wp_enqueue_script(array( 'jquery', 'es5-shim', 'mc4wp-admin' ));
-
+        wp_register_script('mc4wp-admin', MC4WP_PLUGIN_URL . 'assets/js/admin' . $suffix . '.js', array('es5-shim'), MC4WP_VERSION, true);
+        wp_enqueue_script('mc4wp-admin');
         wp_localize_script(
             'mc4wp-admin',
             'mc4wp_vars',
             array(
+                'ajaxurl' => admin_url('admin-ajax.php'),
                 'mailchimp' => array(
                     'api_connected' => ! empty($opts['api_key']),
-                    'lists' => $this->mailchimp->get_cached_lists()
+                    'lists' => $mailchimp->get_lists()
                 ),
                 'countries' => MC4WP_Tools::get_countries(),
                 'i18n' => array(
@@ -322,7 +319,6 @@ class MC4WP_Admin
                     'renew_mailchimp_lists' => __('Renew Mailchimp lists', 'mailchimp-for-wp'),
                     'fetching_mailchimp_lists' => __('Fetching Mailchimp lists', 'mailchimp-for-wp'),
                     'fetching_mailchimp_lists_done' => __('Done! Mailchimp lists renewed.', 'mailchimp-for-wp'),
-                    'fetching_mailchimp_lists_can_take_a_while' => __('This can take a while if you have many Mailchimp lists.', 'mailchimp-for-wp'),
                     'fetching_mailchimp_lists_error' => __('Failed to renew your lists. An error occured.', 'mailchimp-for-wp'),
                 )
             )
@@ -365,7 +361,7 @@ class MC4WP_Admin
                 'callback' => array( $this, 'show_other_setting_page' ),
                 'position' => 90
             ),
-            
+
         );
 
         /**
@@ -387,7 +383,8 @@ class MC4WP_Admin
         $menu_items = (array) apply_filters('mc4wp_admin_menu_items', $menu_items);
 
         // add top menu item
-        add_menu_page('Mailchimp for WP', 'Mailchimp for WP', $required_cap, 'mailchimp-for-wp', array( $this, 'show_generals_setting_page' ), MC4WP_PLUGIN_URL . 'assets/img/icon.png', '99.68491');
+        $icon = file_get_contents(MC4WP_PLUGIN_DIR . 'assets/img/icon.svg');
+        add_menu_page('Mailchimp for WP', 'MC4WP', $required_cap, 'mailchimp-for-wp', array( $this, 'show_generals_setting_page' ), 'data:image/svg+xml;base64,'.base64_encode($icon), '99.68491');
 
         // sort submenu items by 'position'
         usort($menu_items, array( $this, 'sort_menu_items_by_position' ));
@@ -430,11 +427,14 @@ class MC4WP_Admin
     {
         $opts = mc4wp_get_options();
         $api_key = mc4wp_get_api_key();
-
+        $lists = array();
         $connected = ! empty($api_key);
+
         if ($connected) {
             try {
                 $connected = $this->get_api()->is_connected();
+                $mailchimp = new MC4WP_MailChimp();
+                $lists = $mailchimp->get_lists();
             } catch (MC4WP_API_Connection_Exception $e) {
                 $message = sprintf("<strong>%s</strong> %s %s ", __("Error connecting to Mailchimp:", 'mailchimp-for-wp'), $e->getCode(), $e->getMessage());
 
@@ -452,7 +452,6 @@ class MC4WP_Admin
             }
         }
 
-        $lists = $this->mailchimp->get_cached_lists();
         $obfuscated_api_key = mc4wp_obfuscate_string($api_key);
         require MC4WP_PLUGIN_DIR . 'includes/views/general-settings.php';
     }

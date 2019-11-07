@@ -33,13 +33,6 @@ class MC4WP_Usage_Tracking
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-    }
-
-    /**
      * Add hooks
      */
     public function add_hooks()
@@ -113,7 +106,7 @@ class MC4WP_Usage_Tracking
                 'body' => json_encode($data),
                 'headers' => array(
                     'Content-Type' => 'application/json',
-                    'Accept' => 'application/json'
+                    'Accept' => 'application/json',
                 ),
                 'blocking' => false,
             )
@@ -178,10 +171,8 @@ class MC4WP_Usage_Tracking
     protected function get_mailchimp_lists_count()
     {
         $mailchimp = new MC4WP_MailChimp();
-        $list_ids = $mailchimp->get_list_ids(false);
-        return count($list_ids);
+        return count($mailchimp->get_lists());
     }
-
 
     /**
      * @return string

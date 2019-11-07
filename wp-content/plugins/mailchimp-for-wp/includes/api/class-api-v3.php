@@ -170,7 +170,7 @@ class MC4WP_API_v3
      * @return array
      * @throws MC4WP_API_Exception
      */
-    public function get_lists($args = array())
+    public function get_lists(array $args = array())
     {
         $resource = '/lists';
         $data = $this->client->get($resource, $args);
@@ -214,6 +214,35 @@ class MC4WP_API_v3
     {
         $resource = sprintf('/lists/%s', $list_id);
         return $this->client->post($resource, $args);
+    }
+
+    /**
+     * Add a new member to a Mailchimp list.
+     *
+     * @link https://developer.mailchimp.com/documentation/mailchimp/reference/lists/members/#create-post_lists_list_id_members
+     *
+     * @param string $list_id
+     * @param array $args
+     *
+     * @return object
+     * @throws MC4WP_API_Exception
+     */
+    public function add_new_list_member($list_id, array $args)
+    {
+        $resource = sprintf('/lists/%s/members', $list_id);
+
+        // make sure we're sending an object as the Mailchimp schema requires this
+        if (isset($args['merge_fields'])) {
+            $args['merge_fields'] = (object) $args['merge_fields'];
+        }
+
+        if (isset($args['interests'])) {
+            $args['interests'] = (object) $args['interests'];
+        }
+
+        // "put" updates the member if it's already on the list... take notice
+        $data = $this->client->post($resource, $args);
+        return $data;
     }
 
     /**
@@ -875,7 +904,7 @@ class MC4WP_API_v3
     }
 
     /**
-     * @link https://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/carts/#delete-delete_ecommerce_stores_store_id_carts_cart_id
+     * @link https://mailchimp.com/developer/reference/ecommerce-stores/ecommerce-carts/#delete-delete_ecommerce_stores_store_id_carts_cart_id
      *
      * @param string $store_id
      * @param string $cart_id
@@ -1050,6 +1079,7 @@ class MC4WP_API_v3
      * @link https://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/promo-rules/promo-codes/#create-post_ecommerce_stores_store_id_promo_rules_promo_rule_id_promo_codes
      *
      * @param string $store_id
+     * @param string $promo_rule_id
      * @param array $args
      *
      * @return object
@@ -1065,6 +1095,7 @@ class MC4WP_API_v3
      * @link https://developer.mailchimp.com/documentation/mailchimp/reference/ecommerce/stores/promo-rules/promo-codes/#read-get_ecommerce_stores_store_id_promo_rules_promo_rule_id_promo_codes
      *
      * @param string $store_id
+     * @param string $promo_rule_id
      * @param array $args
      *
      * @return object
@@ -1081,6 +1112,7 @@ class MC4WP_API_v3
      *
      * @param string $store_id
      * @param string $promo_rule_id
+     * @param string $promo_code_id
      * @param array $args
      *
      * @return object
@@ -1097,6 +1129,7 @@ class MC4WP_API_v3
      *
      * @param string $store_id
      * @param string $promo_rule_id
+     * @param string $promo_code_id
      * @param array $args
      *
      * @return object
@@ -1113,6 +1146,7 @@ class MC4WP_API_v3
      *
      * @param string $store_id
      * @param string $promo_rule_id
+     * @param string $promo_code_id
      *
      * @return boolean
      * @throws MC4WP_API_Exception
@@ -1143,6 +1177,7 @@ class MC4WP_API_v3
      *
      * @link https://developer.mailchimp.com/documentation/mailchimp/reference/templates/#read-get_templates_template_id
      * @param string $template_id
+     * @param array $args
      * @return object
      * @throws MC4WP_API_Exception
      */
@@ -1155,6 +1190,7 @@ class MC4WP_API_v3
     /**
      * @link https://developer.mailchimp.com/documentation/mailchimp/reference/templates/default-content/
      * @param string $template_id
+     * @param array $args
      * @return object
      * @throws MC4WP_API_Exception
      */
