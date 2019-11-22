@@ -50,6 +50,7 @@
 
 	</style>
 	<?php wp_head(); ?>
+	<script data-ad-client="ca-pub-5028777213996069" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 </head>
 
 <body <?php body_class(array($title_style_class, $widgetborder, $catbgstlye)); $header_color = get_post_meta(get_the_ID(), 'body_color', true);  ?> style="background: <?php echo esc_attr($body_color); ?>">
