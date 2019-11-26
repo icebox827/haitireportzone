@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2c420f229f0b44a84053c7de0a411c61
+class ComposerStaticInit240449e079f81eb74119b90ac782c2b0
 {
     public static $files = array (
         'fca581ae5268210490253d58378748c5' => __DIR__ . '/../..' . '/includes/functions.php',
@@ -12,8 +12,6 @@ class ComposerStaticInit2c420f229f0b44a84053c7de0a411c61
         'd26f3384f491dc697dcc189393343bc3' => __DIR__ . '/../..' . '/includes/forms/functions.php',
         '5a75ca1db309a7972c23644d951fa1be' => __DIR__ . '/../..' . '/includes/forms/admin-functions.php',
         '90c3516593b5de6b5d4528b70e2399dd' => __DIR__ . '/../..' . '/includes/integrations/functions.php',
-        '1961896a7f482d8affe08226795bf674' => __DIR__ . '/../..' . '/includes/default-actions.php',
-        'cb296d991e3145f10320ab99c1b9ed05' => __DIR__ . '/../..' . '/includes/default-filters.php',
     );
 
     public static $prefixesPsr0 = array (
@@ -31,8 +29,8 @@ class ComposerStaticInit2c420f229f0b44a84053c7de0a411c61
         'MC4WP_API_Connection_Exception' => __DIR__ . '/../..' . '/includes/api/class-connection-exception.php',
         'MC4WP_API_Exception' => __DIR__ . '/../..' . '/includes/api/class-exception.php',
         'MC4WP_API_Resource_Not_Found_Exception' => __DIR__ . '/../..' . '/includes/api/class-resource-not-found-exception.php',
-        'MC4WP_API_v3' => __DIR__ . '/../..' . '/includes/api/class-api-v3.php',
-        'MC4WP_API_v3_Client' => __DIR__ . '/../..' . '/includes/api/class-api-v3-client.php',
+        'MC4WP_API_V3' => __DIR__ . '/../..' . '/includes/api/class-api-v3.php',
+        'MC4WP_API_V3_Client' => __DIR__ . '/../..' . '/includes/api/class-api-v3-client.php',
         'MC4WP_Admin' => __DIR__ . '/../..' . '/includes/admin/class-admin.php',
         'MC4WP_Admin_Ads' => __DIR__ . '/../..' . '/includes/admin/class-ads.php',
         'MC4WP_Admin_Ajax' => __DIR__ . '/../..' . '/includes/admin/class-admin-ajax.php',
@@ -80,7 +78,7 @@ class ComposerStaticInit2c420f229f0b44a84053c7de0a411c61
         'MC4WP_Ninja_Forms_Action' => __DIR__ . '/../..' . '/integrations/ninja-forms/class-action.php',
         'MC4WP_Ninja_Forms_Field' => __DIR__ . '/../..' . '/integrations/ninja-forms/class-field.php',
         'MC4WP_Ninja_Forms_Integration' => __DIR__ . '/../..' . '/integrations/ninja-forms/class-ninja-forms.php',
-        'MC4WP_Ninja_Forms_v2_Integration' => __DIR__ . '/../..' . '/integrations/ninja-forms-2/class-ninja-forms.php',
+        'MC4WP_Ninja_Forms_V2_Integration' => __DIR__ . '/../..' . '/integrations/ninja-forms-2/class-ninja-forms.php',
         'MC4WP_Plugin' => __DIR__ . '/../..' . '/includes/class-plugin.php',
         'MC4WP_Queue' => __DIR__ . '/../..' . '/includes/class-queue.php',
         'MC4WP_Queue_Job' => __DIR__ . '/../..' . '/includes/class-queue-job.php',
@@ -100,8 +98,8 @@ class ComposerStaticInit2c420f229f0b44a84053c7de0a411c61
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixesPsr0 = ComposerStaticInit2c420f229f0b44a84053c7de0a411c61::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit2c420f229f0b44a84053c7de0a411c61::$classMap;
+            $loader->prefixesPsr0 = ComposerStaticInit240449e079f81eb74119b90ac782c2b0::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit240449e079f81eb74119b90ac782c2b0::$classMap;
 
         }, null, ClassLoader::class);
     }

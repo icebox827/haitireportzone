@@ -51,7 +51,6 @@ return array(
     'Google\\Site_Kit\\Core\\Util\\Migration_1_0_0' => $baseDir . '/Core/Util/Migration_1_0_0.php',
     'Google\\Site_Kit\\Core\\Util\\Reset' => $baseDir . '/Core/Util/Reset.php',
     'Google\\Site_Kit\\Core\\Util\\Tracking' => $baseDir . '/Core/Util/Tracking.php',
-    'Google\\Site_Kit\\Core\\Util\\Uninstallation' => $baseDir . '/Core/Util/Uninstallation.php',
     'Google\\Site_Kit\\Modules\\AdSense' => $baseDir . '/Modules/AdSense.php',
     'Google\\Site_Kit\\Modules\\Analytics' => $baseDir . '/Modules/Analytics.php',
     'Google\\Site_Kit\\Modules\\Optimize' => $baseDir . '/Modules/Optimize.php',
