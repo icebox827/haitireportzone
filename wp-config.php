@@ -26,7 +26,7 @@ define( 'DB_NAME', 'haitireportzone' );
 define( 'DB_USER', 'root' );
 
 /** MySQL database password */
-define( 'DB_PASSWORD', '' );
+define( 'DB_PASSWORD', '$0l01985Deni$' );
 
 /** MySQL hostname */
 define( 'DB_HOST', 'localhost' );
