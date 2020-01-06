@@ -123,7 +123,7 @@ final class Authentication {
 	/**
 	 * Google_Proxy instance.
 	 *
-	 * @since n.e.x.t
+	 * @since 1.1.2
 	 * @var Google_Proxy
 	 */
 	protected $google_proxy;
@@ -319,12 +319,22 @@ final class Authentication {
 	 * @since 1.0.0
 	 */
 	public function disconnect() {
+		global $wpdb;
+
+		// Revoke token via API call.
 		$this->get_oauth_client()->revoke_token();
 
-		// Delete additional user data.
-		$this->user_options->delete( Verification::OPTION );
-		$this->user_options->delete( Verification_Meta::OPTION );
-		$this->user_options->delete( Profile::OPTION );
+		// Delete all user data.
+		$user_id = $this->user_options->get_user_id();
+		$prefix  = 'googlesitekit\_%';
+		if ( ! $this->context->is_network_mode() ) {
+			$prefix = $wpdb->get_blog_prefix() . $prefix;
+		}
+
+		$wpdb->query( // phpcs:ignore WordPress.VIP.DirectDatabaseQuery
+			$wpdb->prepare( "DELETE FROM $wpdb->usermeta WHERE user_id = %d AND meta_key LIKE %s", $user_id, $prefix )
+		);
+		wp_cache_delete( $user_id, 'user_meta' );
 	}
 
 	/**
@@ -387,19 +397,19 @@ final class Authentication {
 		}
 
 		$auth_client = $this->get_oauth_client();
+		$input       = $this->context->input();
 
 		// Handles Direct OAuth client request.
-		if ( filter_input( INPUT_GET, 'oauth2callback' ) ) {
+		if ( $input->filter( INPUT_GET, 'oauth2callback' ) ) {
 			$auth_client->authorize_user();
-			exit;
 		}
 
 		if ( ! is_admin() ) {
 			return;
 		}
 
-		if ( filter_input( INPUT_GET, 'googlesitekit_disconnect' ) ) {
-			$nonce = filter_input( INPUT_GET, 'nonce' );
+		if ( $input->filter( INPUT_GET, 'googlesitekit_disconnect' ) ) {
+			$nonce = $input->filter( INPUT_GET, 'nonce' );
 			if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'disconnect' ) ) {
 				wp_die( esc_html__( 'Invalid nonce.', 'google-site-kit' ), 400 );
 			}
@@ -417,12 +427,12 @@ final class Authentication {
 				)
 			);
 
-			header( 'Location: ' . filter_var( $redirect_url, FILTER_SANITIZE_URL ) );
+			wp_safe_redirect( $redirect_url );
 			exit();
 		}
 
-		if ( filter_input( INPUT_GET, 'googlesitekit_connect' ) ) {
-			$nonce = filter_input( INPUT_GET, 'nonce' );
+		if ( $input->filter( INPUT_GET, 'googlesitekit_connect' ) ) {
+			$nonce = $input->filter( INPUT_GET, 'nonce' );
 			if ( empty( $nonce ) || ! wp_verify_nonce( $nonce, 'connect' ) ) {
 				wp_die( esc_html__( 'Invalid nonce.', 'google-site-kit' ), 400 );
 			}
@@ -431,13 +441,17 @@ final class Authentication {
 				wp_die( esc_html__( 'You don\'t have permissions to perform this action.', 'google-site-kit' ), 403 );
 			}
 
-			$redirect_url = '';
-			if ( ! empty( $_GET['redirect'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
-				$redirect_url = esc_url_raw( wp_unslash( $_GET['redirect'] ) ); // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+			$redirect_url = $input->filter( INPUT_GET, 'redirect', FILTER_VALIDATE_URL );
+			if ( $redirect_url ) {
+				$redirect_url = esc_url_raw( wp_unslash( $redirect_url ) );
 			}
 
 			// User is trying to authenticate, but access token hasn't been set.
-			header( 'Location: ' . filter_var( $auth_client->get_authentication_url( $redirect_url ), FILTER_SANITIZE_URL ) );
+			wp_safe_redirect(
+				esc_url_raw(
+					$auth_client->get_authentication_url( $redirect_url )
+				)
+			);
 			exit();
 		}
 	}
@@ -525,11 +539,9 @@ final class Authentication {
 			$data['hasSearchConsoleProperty'] = false;
 		}
 
-		$reauth                        = isset( $_GET['reAuth'] ) ? ( 'true' === $_GET['reAuth'] ) : false; // phpcs:ignore WordPress.CSRF.NoNonceVerification.
-		$data['showModuleSetupWizard'] = $reauth;
+		$data['showModuleSetupWizard'] = $this->context->input()->filter( INPUT_GET, 'reAuth', FILTER_VALIDATE_BOOLEAN );
 
-		$module_to_setup       = isset( $_GET['slug'] ) ? sanitize_key( $_GET['slug'] ) : ''; // phpcs:ignore WordPress.CSRF.NoNonceVerification.
-		$data['moduleToSetup'] = $module_to_setup;
+		$data['moduleToSetup'] = sanitize_key( (string) $this->context->input()->filter( INPUT_GET, 'slug' ) );
 
 		return $data;
 	}
@@ -709,7 +721,7 @@ final class Authentication {
 	/**
 	 * Verifies the nonce for processing proxy setup.
 	 *
-	 * @since n.e.x.t
+	 * @since 1.1.2
 	 */
 	private function verify_proxy_setup_nonce() {
 		$nonce = $this->context->input()->filter( INPUT_GET, 'nonce', FILTER_SANITIZE_STRING );
@@ -722,7 +734,7 @@ final class Authentication {
 	/**
 	 * Handles the exchange of a code and site code for client credentials from the proxy.
 	 *
-	 * @since n.e.x.t
+	 * @since 1.1.2
 	 *
 	 * @param string $code      Code ('googlesitekit_code') provided by proxy.
 	 * @param string $site_code Site code ('googlesitekit_site_code') provided by proxy.
@@ -774,7 +786,7 @@ final class Authentication {
 	/**
 	 * Redirects back to the authentication service with any added parameters.
 	 *
-	 * @since n.e.x.t
+	 * @since 1.1.2
 	 *
 	 * @param string $code Code ('googlesitekit_code') provided by proxy.
 	 */

@@ -10,18 +10,19 @@
 
 namespace Google\Site_Kit\Core\Authentication\Clients;
 
+use Exception;
 use Google\Site_Kit\Context;
-use Google\Site_Kit\Core\Storage\Options;
-use Google\Site_Kit\Core\Storage\User_Options;
+use Google\Site_Kit\Core\Authentication\Credentials;
+use Google\Site_Kit\Core\Authentication\Google_Proxy;
+use Google\Site_Kit\Core\Authentication\Profile;
+use Google\Site_Kit\Core\Authentication\Verification;
 use Google\Site_Kit\Core\Storage\Encrypted_Options;
 use Google\Site_Kit\Core\Storage\Encrypted_User_Options;
-use Google\Site_Kit\Core\Authentication\Credentials;
-use Google\Site_Kit\Core\Authentication\Verification;
-use Google\Site_Kit\Core\Authentication\Google_Proxy;
+use Google\Site_Kit\Core\Storage\Options;
+use Google\Site_Kit\Core\Storage\User_Options;
 use Google\Site_Kit\Modules\Search_Console;
-use Google\Site_Kit\Modules\Site_Verification;
 use Google\Site_Kit_Dependencies\Google_Client;
-use Exception;
+use Google\Site_Kit_Dependencies\Google_Service_PeopleService;
 
 /**
  * Class for connecting to Google APIs via OAuth.
@@ -92,7 +93,7 @@ final class OAuth_Client {
 	/**
 	 * Google_Proxy instance.
 	 *
-	 * @since n.e.x.t
+	 * @since 1.1.2
 	 * @var Google_Proxy
 	 */
 	private $google_proxy;
@@ -104,6 +105,14 @@ final class OAuth_Client {
 	 * @var Google_Client
 	 */
 	private $google_client;
+
+	/**
+	 * Profile instance.
+	 *
+	 * @since 1.1.4
+	 * @var Profile
+	 */
+	private $profile;
 
 	/**
 	 * Access token for communication with Google APIs, for temporary storage.
@@ -139,38 +148,24 @@ final class OAuth_Client {
 	 * @param User_Options $user_options Optional. User Option API instance. Default is a new instance.
 	 * @param Credentials  $credentials  Optional. Credentials instance. Default is a new instance from $options.
 	 * @param Google_Proxy $google_proxy Optional. Google proxy instance. Default is a new instance.
+	 * @param Profile      $profile Optional. Profile instance. Default is a new instance.
 	 */
 	public function __construct(
 		Context $context,
 		Options $options = null,
 		User_Options $user_options = null,
 		Credentials $credentials = null,
-		Google_Proxy $google_proxy = null
+		Google_Proxy $google_proxy = null,
+		Profile $profile = null
 	) {
-		$this->context = $context;
-
-		if ( ! $options ) {
-			$options = new Options( $this->context );
-		}
-		$this->options = $options;
-
-		if ( ! $user_options ) {
-			$user_options = new User_Options( $this->context );
-		}
-		$this->user_options = $user_options;
-
+		$this->context                = $context;
+		$this->options                = $options ?: new Options( $this->context );
+		$this->user_options           = $user_options ?: new User_Options( $this->context );
 		$this->encrypted_options      = new Encrypted_Options( $this->options );
 		$this->encrypted_user_options = new Encrypted_User_Options( $this->user_options );
-
-		if ( ! $credentials ) {
-			$credentials = new Credentials( $this->options );
-		}
-		$this->credentials = $credentials;
-
-		if ( ! $google_proxy ) {
-			$google_proxy = new Google_Proxy( $this->context );
-		}
-		$this->google_proxy = $google_proxy;
+		$this->credentials            = $credentials ?: new Credentials( $this->options );
+		$this->google_proxy           = $google_proxy ?: new Google_Proxy( $this->context );
+		$this->profile                = $profile ?: new Profile( $this->user_options );
 	}
 
 	/**
@@ -210,11 +205,14 @@ final class OAuth_Client {
 		// Offline access so we can access the refresh token even when the user is logged out.
 		$this->google_client->setAccessType( 'offline' );
 		$this->google_client->setPrompt( 'consent' );
-
 		$this->google_client->setRedirectUri( $this->get_redirect_uri() );
-
 		$this->google_client->setScopes( $this->get_required_scopes() );
 		$this->google_client->prepareScopes();
+
+		$profile = $this->profile->get();
+		if ( ! empty( $profile['email'] ) ) {
+			$this->google_client->setLoginHint( $profile['email'] );
+		}
 
 		$access_token = $this->get_access_token();
 
@@ -501,8 +499,9 @@ final class OAuth_Client {
 	 * @since 1.0.0
 	 */
 	public function authorize_user() {
-		// If the OAuth redirects with an error code, handle it.
+		$code       = $this->context->input()->filter( INPUT_GET, 'code', FILTER_SANITIZE_STRING );
 		$error_code = $this->context->input()->filter( INPUT_GET, 'error', FILTER_SANITIZE_STRING );
+		// If the OAuth redirects with an error code, handle it.
 		if ( ! empty( $error_code ) ) {
 			$this->user_options->set( self::OPTION_ERROR_CODE, $error_code );
 			wp_safe_redirect( admin_url() );
@@ -516,7 +515,7 @@ final class OAuth_Client {
 		}
 
 		try {
-			$authentication_token = $this->get_client()->fetchAccessTokenWithAuthCode( $_GET['code'] ); // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+			$authentication_token = $this->get_client()->fetchAccessTokenWithAuthCode( $code );
 		} catch ( Google_Proxy_Exception $e ) {
 			wp_safe_redirect( $this->get_proxy_setup_url( $e->getAccessCode(), $e->getMessage() ) );
 			exit();
@@ -548,9 +547,10 @@ final class OAuth_Client {
 
 		// Update granted scopes.
 		if ( isset( $authentication_token['scope'] ) ) {
-			$scopes = explode( ' ', $authentication_token['scope'] );
-		} elseif ( isset( $_GET['scope'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
-			$scopes = explode( ' ', $_GET['scope'] ); // phpcs:ignore WordPress.Security.NonceVerification.NoNonceVerification
+			$scopes = explode( ' ', sanitize_text_field( $authentication_token['scope'] ) );
+		} elseif ( $this->context->input()->filter( INPUT_GET, 'scope' ) ) {
+			$scope  = $this->context->input()->filter( INPUT_GET, 'scope', FILTER_SANITIZE_STRING );
+			$scopes = explode( ' ', $scope );
 		} else {
 			$scopes = $this->get_required_scopes();
 		}
@@ -567,6 +567,8 @@ final class OAuth_Client {
 			}
 		);
 		$this->set_granted_scopes( $scopes );
+
+		$this->refresh_profile_data();
 
 		// If using the proxy, these values can reliably be set at this point because the proxy already took care of
 		// them.
@@ -593,6 +595,30 @@ final class OAuth_Client {
 
 		wp_safe_redirect( $redirect_url );
 		exit();
+	}
+
+	/**
+	 * Fetches and updates the user profile data for the currently authenticated Google account.
+	 *
+	 * @since 1.1.4
+	 */
+	private function refresh_profile_data() {
+		try {
+			$people_service = new Google_Service_PeopleService( $this->get_client() );
+			$response       = $people_service->people->get( 'people/me', array( 'personFields' => 'emailAddresses,photos' ) );
+
+			if ( isset( $response['emailAddresses'][0]['value'], $response['photos'][0]['url'] ) ) {
+				$this->profile->set(
+					array(
+						'email' => $response['emailAddresses'][0]['value'],
+						'photo' => $response['photos'][0]['url'],
+					)
+				);
+			}
+		} catch ( Exception $e ) { // phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedCatch
+			// This request is unlikely to fail and isn't critical as Site Kit will fallback to the current WP user
+			// if no Profile data exists. Don't do anything for now.
+		}
 	}
 
 	/**
@@ -626,7 +652,7 @@ final class OAuth_Client {
 	 * Returns the setup URL to the authentication proxy.
 	 *
 	 * @since 1.0.0
-	 * @since n.e.x.t Added googlesitekit_proxy_setup_url_params filter.
+	 * @since 1.1.2 Added googlesitekit_proxy_setup_url_params filter.
 	 *
 	 * @param string $access_code Optional. Temporary access code for an undelegated access token. Default empty string.
 	 * @param string $error_code  Optional. Error code, if the user should be redirected because of an error. Default empty string.
@@ -651,7 +677,7 @@ final class OAuth_Client {
 		/**
 		 * Filters parameters included in proxy setup URL.
 		 *
-		 * @since n.e.x.t
+		 * @since 1.1.2
 		 *
 		 * @param string $access_code Temporary access code for an undelegated access token.
 		 * @param string $error_code  Error code, if the user should be redirected because of an error.
@@ -678,7 +704,7 @@ final class OAuth_Client {
 	 * Gets the list of features to declare support for when setting up with the proxy.
 	 *
 	 * @since 1.1.0
-	 * @since n.e.x.t Added 'credentials_retrieval'
+	 * @since 1.1.2 Added 'credentials_retrieval'
 	 * @return array Array of supported features.
 	 */
 	private function get_proxy_setup_supports() {
