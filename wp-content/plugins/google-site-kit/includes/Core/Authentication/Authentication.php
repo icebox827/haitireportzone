@@ -13,11 +13,15 @@ namespace Google\Site_Kit\Core\Authentication;
 use Google\Site_Kit\Context;
 use Google\Site_Kit\Core\Authentication\Clients\OAuth_Client;
 use Google\Site_Kit\Core\Permissions\Permissions;
+use Google\Site_Kit\Core\REST_API\REST_Route;
 use Google\Site_Kit\Core\Storage\Encrypted_Options;
 use Google\Site_Kit\Core\Storage\Options;
 use Google\Site_Kit\Core\Storage\User_Options;
 use Google\Site_Kit\Core\Storage\Transients;
 use Google\Site_Kit\Core\Admin\Notice;
+use WP_REST_Server;
+use WP_REST_Request;
+use WP_REST_Response;
 use Exception;
 
 /**
@@ -130,6 +134,13 @@ final class Authentication {
 	protected $google_proxy;
 
 	/**
+	 * Flag set when site fields are synchronized during the current request.
+	 *
+	 * @var bool
+	 */
+	private $did_sync_fields;
+
+	/**
 	 * Constructor.
 	 *
 	 * @since 1.0.0
@@ -145,29 +156,16 @@ final class Authentication {
 		User_Options $user_options = null,
 		Transients $transients = null
 	) {
-		$this->context = $context;
-
-		if ( ! $options ) {
-			$options = new Options( $this->context );
-		}
-		$this->options = $options;
-
-		if ( ! $user_options ) {
-			$user_options = new User_Options( $this->context );
-		}
-		$this->user_options = $user_options;
-
-		if ( ! $transients ) {
-			$transients = new Transients( $this->context );
-		}
-		$this->transients = $transients;
-
+		$this->context           = $context;
+		$this->options           = $options ?: new Options( $this->context );
+		$this->user_options      = $user_options ?: new User_Options( $this->context );
+		$this->transients        = $transients ?: new Transients( $this->context );
 		$this->google_proxy      = new Google_Proxy( $this->context );
 		$this->credentials       = new Credentials( new Encrypted_Options( $this->options ) );
 		$this->verification      = new Verification( $this->user_options );
-		$this->verification_meta = new Verification_Meta( $this->user_options, $this->transients );
+		$this->verification_meta = new Verification_Meta( $this->user_options );
 		$this->verification_file = new Verification_File( $this->user_options );
-		$this->profile           = new Profile( $user_options );
+		$this->profile           = new Profile( $this->user_options );
 		$this->first_admin       = new First_Admin( $this->options );
 	}
 
@@ -177,10 +175,22 @@ final class Authentication {
 	 * @since 1.0.0
 	 */
 	public function register() {
+		$this->credentials()->register();
+		$this->verification()->register();
+		$this->verification_file()->register();
+		$this->verification_meta()->register();
+
 		add_action(
 			'init',
 			function() {
 				$this->handle_oauth();
+			}
+		);
+
+		add_filter(
+			'googlesitekit_rest_routes',
+			function( $routes ) {
+				return array_merge( $routes, $this->get_rest_routes() );
 			}
 		);
 
@@ -237,6 +247,25 @@ final class Authentication {
 				$this->redirect_to_proxy( $code );
 			}
 		);
+
+		// Synchronize site fields on shutdown when select options change.
+		$option_updated = function () {
+			$sync_site_fields = function () {
+				if ( $this->did_sync_fields ) {
+					return;
+				}
+				// This method should run no more than once per request.
+				$this->did_sync_fields = true;
+
+				if ( $this->get_oauth_client()->using_proxy() ) {
+					$this->google_proxy->sync_site_fields( $this->credentials() );
+				}
+			};
+			add_action( 'shutdown', $sync_site_fields );
+		};
+		add_action( 'update_option_home', $option_updated );
+		add_action( 'update_option_siteurl', $option_updated );
+		add_action( 'update_option_googlesitekit_db_version', $option_updated );
 	}
 
 	/**
@@ -339,7 +368,8 @@ final class Authentication {
 			$prefix = $wpdb->get_blog_prefix() . $prefix;
 		}
 
-		$wpdb->query( // phpcs:ignore WordPress.VIP.DirectDatabaseQuery
+		// phpcs:ignore WordPress.DB.DirectDatabaseQuery
+		$wpdb->query(
 			$wpdb->prepare( "DELETE FROM $wpdb->usermeta WHERE user_id = %d AND meta_key LIKE %s", $user_id, $prefix )
 		);
 		wp_cache_delete( $user_id, 'user_meta' );
@@ -542,7 +572,7 @@ final class Authentication {
 		$access_token = $auth_client->get_access_token();
 
 		$data['isSiteKitConnected'] = $this->credentials->has();
-		$data['isResettable']       = (bool) $this->options->get( Credentials::OPTION );
+		$data['isResettable']       = $this->options->has( Credentials::OPTION );
 		$data['isAuthenticated']    = ! empty( $access_token );
 		$data['requiredScopes']     = $auth_client->get_required_scopes();
 		$data['grantedScopes']      = ! empty( $access_token ) ? $auth_client->get_granted_scopes() : array();
@@ -597,6 +627,77 @@ final class Authentication {
 		$hosts[] = wp_parse_url( $this->google_proxy->url(), PHP_URL_HOST );
 
 		return $hosts;
+	}
+
+	/**
+	 * Gets related REST routes.
+	 *
+	 * @since 1.3.0
+	 *
+	 * @return array List of REST_Route objects.
+	 */
+	private function get_rest_routes() {
+		$can_setup = function() {
+			return current_user_can( Permissions::SETUP );
+		};
+
+		$can_authenticate = function() {
+			return current_user_can( Permissions::AUTHENTICATE );
+		};
+
+		return array(
+			new REST_Route(
+				'core/site/data/connection',
+				array(
+					array(
+						'methods'             => WP_REST_Server::READABLE,
+						'callback'            => function( WP_REST_Request $request ) {
+							$data = array(
+								'connected'  => $this->credentials->has(),
+								'resettable' => $this->options->has( Credentials::OPTION ),
+							);
+
+							return new WP_REST_Response( $data );
+						},
+						'permission_callback' => $can_setup,
+					),
+				)
+			),
+			new REST_Route(
+				'core/user/data/authentication',
+				array(
+					array(
+						'methods'             => WP_REST_Server::READABLE,
+						'callback'            => function( WP_REST_Request $request ) {
+							$oauth_client = $this->get_oauth_client();
+							$access_token = $oauth_client->get_access_token();
+
+							$data = array(
+								'isAuthenticated' => ! empty( $access_token ),
+								'requiredScopes'  => $oauth_client->get_required_scopes(),
+								'grantedScopes'   => ! empty( $access_token ) ? $oauth_client->get_granted_scopes() : array(),
+							);
+
+							return new WP_REST_Response( $data );
+						},
+						'permission_callback' => $can_authenticate,
+					),
+				)
+			),
+			new REST_Route(
+				'core/user/data/disconnect',
+				array(
+					array(
+						'methods'             => WP_REST_Server::EDITABLE,
+						'callback'            => function( WP_REST_Request $request ) {
+							$this->disconnect();
+							return new WP_REST_Response( true );
+						},
+						'permission_callback' => $can_authenticate,
+					),
+				)
+			),
+		);
 	}
 
 	/**
@@ -702,7 +803,12 @@ final class Authentication {
 						);
 						$this->user_options->delete( OAuth_Client::OPTION_PROXY_ACCESS_CODE );
 					} else {
-						$message = $auth_client->get_error_message( $error_code );
+						$message  = $auth_client->get_error_message( $error_code );
+						$message .= ' ' . sprintf(
+							/* translators: %s: setup screen URL */
+							__( 'To resume setup, <a href="%s">start here</a>.', 'google-site-kit' ),
+							$this->context->admin_url( 'splash' )
+						);
 					}
 
 					$message = wp_kses(

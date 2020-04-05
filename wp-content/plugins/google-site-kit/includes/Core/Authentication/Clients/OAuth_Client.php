@@ -264,17 +264,15 @@ final class OAuth_Client {
 
 		// This is called when the client refreshes the access token on-the-fly.
 		$client->setTokenCallback(
-			function( $cache_key, $access_token ) {
+			function( $cache_key, $access_token ) use ( $client ) {
 				$expires_in = HOUR_IN_SECONDS; // Sane default, Google OAuth tokens are typically valid for an hour.
 				$created    = 0; // This will be replaced with the current timestamp when saving.
 
 				// Try looking up the real values if possible.
-				if ( isset( $client ) ) {
-					$token = $client->getAccessToken();
-					if ( isset( $token['access_token'], $token['expires_in'], $token['created'] ) && $access_token === $token['access_token'] ) {
-						$expires_in = $token['expires_in'];
-						$created    = $token['created'];
-					}
+				$token = $client->getAccessToken();
+				if ( isset( $token['access_token'], $token['expires_in'], $token['created'] ) && $access_token === $token['access_token'] ) {
+					$expires_in = $token['expires_in'];
+					$created    = $token['created'];
 				}
 
 				$this->set_access_token( $access_token, $expires_in, $created );
@@ -334,21 +332,21 @@ final class OAuth_Client {
 		}
 
 		try {
-			$authentication_token = $this->google_client->fetchAccessTokenWithRefreshToken( $refresh_token );
+			$token_response = $this->google_client->fetchAccessTokenWithRefreshToken( $refresh_token );
 		} catch ( \Exception $e ) {
 			$this->handle_fetch_token_exception( $e );
 			return;
 		}
 
-		if ( ! isset( $authentication_token['access_token'] ) ) {
+		if ( ! isset( $token_response['access_token'] ) ) {
 			$this->user_options->set( self::OPTION_ERROR_CODE, 'access_token_not_received' );
 			return;
 		}
 
 		$this->set_access_token(
-			$authentication_token['access_token'],
-			isset( $authentication_token['expires_in'] ) ? $authentication_token['expires_in'] : '',
-			isset( $authentication_token['created'] ) ? $authentication_token['created'] : 0
+			$token_response['access_token'],
+			isset( $token_response['expires_in'] ) ? $token_response['expires_in'] : '',
+			isset( $token_response['created'] ) ? $token_response['created'] : 0
 		);
 	}
 
@@ -470,7 +468,7 @@ final class OAuth_Client {
 
 		// If not provided, assume current GMT time.
 		if ( empty( $created ) ) {
-			$created = current_time( 'timestamp', 1 );
+			$created = time();
 		}
 
 		$this->user_options->set( self::OPTION_ACCESS_TOKEN_EXPIRES_IN, $expires_in );
@@ -569,7 +567,7 @@ final class OAuth_Client {
 		}
 
 		try {
-			$authentication_token = $this->get_client()->fetchAccessTokenWithAuthCode( $code );
+			$token_response = $this->get_client()->fetchAccessTokenWithAuthCode( $code );
 		} catch ( Google_Proxy_Code_Exception $e ) {
 			// Redirect back to proxy immediately with the access code.
 			wp_safe_redirect( $this->get_proxy_setup_url( $e->getAccessCode(), $e->getMessage() ) );
@@ -580,16 +578,16 @@ final class OAuth_Client {
 			exit();
 		}
 
-		if ( ! isset( $authentication_token['access_token'] ) ) {
+		if ( ! isset( $token_response['access_token'] ) ) {
 			$this->user_options->set( self::OPTION_ERROR_CODE, 'access_token_not_received' );
 			wp_safe_redirect( admin_url() );
 			exit();
 		}
 
 		$this->set_access_token(
-			$authentication_token['access_token'],
-			isset( $authentication_token['expires_in'] ) ? $authentication_token['expires_in'] : '',
-			isset( $authentication_token['created'] ) ? $authentication_token['created'] : 0
+			$token_response['access_token'],
+			isset( $token_response['expires_in'] ) ? $token_response['expires_in'] : '',
+			isset( $token_response['created'] ) ? $token_response['created'] : 0
 		);
 
 		// Update the site refresh token.
@@ -597,8 +595,8 @@ final class OAuth_Client {
 		$this->set_refresh_token( $refresh_token );
 
 		// Update granted scopes.
-		if ( isset( $authentication_token['scope'] ) ) {
-			$scopes = explode( ' ', sanitize_text_field( $authentication_token['scope'] ) );
+		if ( isset( $token_response['scope'] ) ) {
+			$scopes = explode( ' ', sanitize_text_field( $token_response['scope'] ) );
 		} elseif ( $this->context->input()->filter( INPUT_GET, 'scope' ) ) {
 			$scope  = $this->context->input()->filter( INPUT_GET, 'scope', FILTER_SANITIZE_STRING );
 			$scopes = explode( ' ', $scope );
@@ -621,13 +619,22 @@ final class OAuth_Client {
 
 		$this->refresh_profile_data();
 
-		// If using the proxy, these values can reliably be set at this point because the proxy already took care of
-		// them.
-		// TODO: In the future, once the old authentication mechanism no longer exists, this should be resolved in
-		// another way.
+		// TODO: In the future, once the old authentication mechanism no longer exists, this check can be removed.
+		// For now the below action should only fire for the proxy despite not clarifying that in the hook name.
 		if ( $this->using_proxy() ) {
-			$this->user_options->set( Verification::OPTION, 'verified' );
-			$this->options->set( Search_Console::PROPERTY_OPTION, trailingslashit( $this->context->get_reference_site_url() ) );
+			/**
+			 * Fires when the current user has just been authorized to access Google APIs.
+			 *
+			 * In other words, this action fires whenever Site Kit has just obtained a new set of access token and
+			 * refresh token for the current user, which may happen to set up the initial connection or to request
+			 * access to further scopes.
+			 *
+			 * @since 1.3.0
+			 * @since 1.6.0 The $token_response parameter was added.
+			 *
+			 * @param array $token_response Token response data.
+			 */
+			do_action( 'googlesitekit_authorize_user', $token_response );
 		}
 
 		$redirect_url = $this->user_options->get( self::OPTION_REDIRECT_URL );
@@ -736,15 +743,8 @@ final class OAuth_Client {
 
 		// If no site identification information is present, we need to provide details for a new site.
 		if ( empty( $query_params['site_id'] ) && empty( $query_params['site_code'] ) ) {
-			$home_url           = home_url();
-			$home_url_no_scheme = str_replace( array( 'http://', 'https://' ), '', $home_url );
-			$rest_root          = str_replace( array( 'http://', 'https://', $home_url_no_scheme ), '', rest_url() );
-			$admin_root         = str_replace( array( 'http://', 'https://', $home_url_no_scheme ), '', admin_url() );
-
-			$query_params['name']       = rawurlencode( wp_specialchars_decode( get_bloginfo( 'name' ) ) );
-			$query_params['url']        = rawurlencode( $home_url );
-			$query_params['rest_root']  = rawurlencode( $rest_root );
-			$query_params['admin_root'] = rawurlencode( $admin_root );
+			$site_fields  = array_map( 'rawurlencode', $this->google_proxy->get_site_fields() );
+			$query_params = array_merge( $query_params, $site_fields );
 		}
 
 		return add_query_arg( $query_params, $this->google_proxy->url( Google_Proxy::SETUP_URI ) );
@@ -831,6 +831,8 @@ final class OAuth_Client {
 				return __( 'Unable to receive access token because of an empty authorization code.', 'google-site-kit' );
 			case 'access_token_not_received':
 				return __( 'Unable to receive access token because of an unknown error.', 'google-site-kit' );
+			case 'access_denied':
+				return __( 'The Site Kit setup was interrupted because you did not grant the necessary permissions.', 'google-site-kit' );
 			// The following messages are based on https://tools.ietf.org/html/rfc6749#section-5.2.
 			case 'invalid_request':
 				return __( 'Unable to receive access token because of an invalid OAuth request.', 'google-site-kit' );
