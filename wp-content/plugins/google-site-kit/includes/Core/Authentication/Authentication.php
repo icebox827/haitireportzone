@@ -14,6 +14,7 @@ use Google\Site_Kit\Context;
 use Google\Site_Kit\Core\Authentication\Clients\OAuth_Client;
 use Google\Site_Kit\Core\Permissions\Permissions;
 use Google\Site_Kit\Core\REST_API\REST_Route;
+use Google\Site_Kit\Core\REST_API\REST_Routes;
 use Google\Site_Kit\Core\Storage\Encrypted_Options;
 use Google\Site_Kit\Core\Storage\Options;
 use Google\Site_Kit\Core\Storage\User_Options;
@@ -195,6 +196,17 @@ final class Authentication {
 		);
 
 		add_filter(
+			'googlesitekit_apifetch_preload_paths',
+			function( $routes ) {
+				$authentication_routes = array(
+					'/' . REST_Routes::REST_ROOT . '/core/site/data/connection',
+					'/' . REST_Routes::REST_ROOT . '/core/user/data/authentication',
+				);
+				return array_merge( $routes, $authentication_routes );
+			}
+		);
+
+		add_filter(
 			'googlesitekit_inline_base_data',
 			function ( $data ) {
 				return $this->inline_js_base_data( $data );
@@ -265,6 +277,7 @@ final class Authentication {
 		};
 		add_action( 'update_option_home', $option_updated );
 		add_action( 'update_option_siteurl', $option_updated );
+		add_action( 'update_option_blogname', $option_updated );
 		add_action( 'update_option_googlesitekit_db_version', $option_updated );
 	}
 
@@ -422,6 +435,34 @@ final class Authentication {
 		$access_token = $auth_client->get_access_token();
 
 		return ! empty( $access_token );
+	}
+
+	/**
+	 * Checks whether the Site Kit setup is considered complete.
+	 *
+	 * If this is not the case, most permissions will be force-prevented to ensure that only permissions required for
+	 * initial setup are granted.
+	 *
+	 * @since 1.0.0
+	 * @since 1.7.0 Moved from `Permissions` class.
+	 *
+	 * @return bool True if setup is completed, false otherwise.
+	 */
+	public function is_setup_completed() {
+		if ( ! $this->credentials->has() ) {
+			return false;
+		}
+
+		/**
+		 * Filters whether the Site Kit plugin should consider its setup to be completed.
+		 *
+		 * This can be used by essential auto-activated modules to amend the result of this check.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param bool $complete Whether the setup is completed.
+		 */
+		return (bool) apply_filters( 'googlesitekit_setup_complete', true );
 	}
 
 	/**
@@ -653,8 +694,9 @@ final class Authentication {
 						'methods'             => WP_REST_Server::READABLE,
 						'callback'            => function( WP_REST_Request $request ) {
 							$data = array(
-								'connected'  => $this->credentials->has(),
-								'resettable' => $this->options->has( Credentials::OPTION ),
+								'connected'      => $this->credentials->has(),
+								'resettable'     => $this->options->has( Credentials::OPTION ),
+								'setupCompleted' => $this->is_setup_completed(),
 							);
 
 							return new WP_REST_Response( $data );
@@ -773,7 +815,6 @@ final class Authentication {
 	 * @return Notice Notice object.
 	 */
 	private function get_authentication_oauth_error_notice() {
-
 		return new Notice(
 			'oauth_error',
 			array(
