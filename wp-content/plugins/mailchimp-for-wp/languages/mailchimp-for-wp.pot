@@ -65,67 +65,67 @@ msgstr ""
 msgid "Documentation"
 msgstr ""
 
-#: includes/admin/class-admin.php:209
+#: includes/admin/class-admin.php:208
 msgid "Success! The cached configuration for your Mailchimp lists has been renewed."
 msgstr ""
 
-#: includes/admin/class-admin.php:300
+#: includes/admin/class-admin.php:299
 msgid "The given value does not look like a valid Mailchimp API key."
 msgstr ""
 
-#: includes/admin/class-admin.php:301
+#: includes/admin/class-admin.php:300
 msgid "This is a premium feature. Please upgrade to Mailchimp for WordPress Premium to be able to use it."
 msgstr ""
 
-#: includes/admin/class-admin.php:302, includes/views/parts/lists-overview.php:10, includes/forms/views/parts/add-fields-help.php:47
+#: includes/admin/class-admin.php:301, includes/views/parts/lists-overview.php:10, includes/forms/views/parts/add-fields-help.php:47
 msgid "Renew Mailchimp lists"
 msgstr ""
 
-#: includes/admin/class-admin.php:303
+#: includes/admin/class-admin.php:302
 msgid "Fetching Mailchimp lists"
 msgstr ""
 
-#: includes/admin/class-admin.php:304
+#: includes/admin/class-admin.php:303
 msgid "Done! Mailchimp lists renewed."
 msgstr ""
 
-#: includes/admin/class-admin.php:305
+#: includes/admin/class-admin.php:304
 msgid "Failed to renew your lists. An error occured."
 msgstr ""
 
-#: includes/admin/class-admin.php:333
+#: includes/admin/class-admin.php:332
 msgid "Mailchimp API Settings"
 msgstr ""
 
-#: includes/admin/class-admin.php:340, includes/views/other-settings.php:60, includes/views/other-settings.php:70
+#: includes/admin/class-admin.php:339, includes/views/other-settings.php:60, includes/views/other-settings.php:70
 msgid "Other Settings"
 msgstr ""
 
-#: includes/admin/class-admin.php:341
+#: includes/admin/class-admin.php:340
 msgid "Other"
 msgstr ""
 
-#: includes/admin/class-admin.php:419
+#: includes/admin/class-admin.php:418
 msgid "Error connecting to Mailchimp:"
 msgstr ""
 
-#: includes/admin/class-admin.php:422
+#: includes/admin/class-admin.php:421
 msgid "Looks like your server is blocked by Mailchimp's firewall. Please contact Mailchimp support and include the following reference number: %s"
 msgstr ""
 
-#: includes/admin/class-admin.php:425
+#: includes/admin/class-admin.php:424
 msgid "Here's some info on solving common connectivity issues."
 msgstr ""
 
-#: includes/admin/class-admin.php:430
+#: includes/admin/class-admin.php:429
 msgid "Mailchimp returned the following error:"
 msgstr ""
 
-#: includes/admin/class-admin.php:468
+#: includes/admin/class-admin.php:467
 msgid "Log successfully emptied."
 msgstr ""
 
-#: includes/admin/class-admin.php:498
+#: includes/admin/class-admin.php:497
 msgid "To get started with Mailchimp for WordPress, please <a href=\"%s\">enter your Mailchimp API key on the settings page of the plugin</a>."
 msgstr ""
 
@@ -137,12 +137,12 @@ msgstr ""
 msgid "Want to customize the style of your form? <a href=\"%s\">Try our Styles Builder</a> & edit the look of your forms with just a few clicks."
 msgstr ""
 
-#: includes/admin/class-ads.php:69
-msgid "Be notified whenever someone subscribes? <a href=\"%s\">Mailchimp for WordPress Premium</a> allows you to set up email notifications for your forms."
-msgstr ""
-
 #: includes/admin/class-ads.php:71
 msgid "Increased conversions? <a href=\"%s\">Mailchimp for WordPress Premium</a> submits forms without reloading the entire page, resulting in a much better experience for your visitors."
+msgstr ""
+
+#: includes/admin/class-ads.php:69
+msgid "Be notified whenever someone subscribes? <a href=\"%s\">Mailchimp for WordPress Premium</a> allows you to set up email notifications for your forms."
 msgstr ""
 
 #: includes/admin/class-ads.php:85
@@ -377,27 +377,27 @@ msgstr ""
 msgid "Form"
 msgstr ""
 
-#: includes/forms/class-admin.php:163, includes/forms/class-admin.php:296
+#: includes/forms/class-admin.php:163, includes/forms/class-admin.php:284
 msgid "Form saved."
 msgstr ""
 
-#: includes/forms/class-admin.php:399
+#: includes/forms/class-admin.php:387
 msgid "Form not found."
 msgstr ""
 
-#: includes/forms/class-admin.php:401
+#: includes/forms/class-admin.php:389
 msgid "Go back"
 msgstr ""
 
-#: includes/forms/class-admin.php:464, includes/forms/class-widget.php:31
+#: includes/forms/class-admin.php:452, includes/forms/class-widget.php:31
 msgid "Mailchimp Sign-Up Form"
 msgstr ""
 
-#: includes/forms/class-admin.php:468
+#: includes/forms/class-admin.php:456
 msgid "Select the form to show"
 msgstr ""
 
-#: includes/forms/class-form-amp.php:32
+#: includes/forms/class-form-amp.php:33
 msgid "Submitting..."
 msgstr ""
 
@@ -489,12 +489,12 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: includes/views/general-settings.php:40
-msgid "CONNECTED"
-msgstr ""
-
 #: includes/views/general-settings.php:44
 msgid "NOT CONNECTED"
+msgstr ""
+
+#: includes/views/general-settings.php:40
+msgid "CONNECTED"
 msgstr ""
 
 #: includes/views/general-settings.php:53
@@ -557,20 +557,20 @@ msgstr ""
 msgid "Filter.."
 msgstr ""
 
-#: includes/views/other-settings.php:104
-msgid "Log file is not writable."
-msgstr ""
-
-#: includes/views/other-settings.php:105
-msgid "Please ensure %1$s has the proper <a href=\"%2$s\">file permissions</a>."
-msgstr ""
-
 #: includes/views/other-settings.php:126
 msgid "Nothing here. Which means there are no errors!"
 msgstr ""
 
 #: includes/views/other-settings.php:135
 msgid "Empty Log"
+msgstr ""
+
+#: includes/views/other-settings.php:104
+msgid "Log file is not writable."
+msgstr ""
+
+#: includes/views/other-settings.php:105
+msgid "Please ensure %1$s has the proper <a href=\"%2$s\">file permissions</a>."
 msgstr ""
 
 #: includes/views/other-settings.php:143
@@ -669,12 +669,12 @@ msgstr ""
 msgid "Mailchimp Lists"
 msgstr ""
 
-#: includes/integrations/views/integration-settings.php:136
-msgid "Select the list(s) to which people who check the checkbox should be subscribed."
-msgstr ""
-
 #: includes/integrations/views/integration-settings.php:140, includes/forms/views/tabs/form-settings.php:20
 msgid "No lists found, <a href=\"%s\">are you connected to Mailchimp</a>?"
+msgstr ""
+
+#: includes/integrations/views/integration-settings.php:136
+msgid "Select the list(s) to which people who check the checkbox should be subscribed."
 msgstr ""
 
 #: includes/integrations/views/integration-settings.php:156
@@ -733,16 +733,16 @@ msgstr ""
 msgid "Configure this integration"
 msgstr ""
 
-#: includes/integrations/views/integrations.php:36
-msgid "Active"
+#: includes/integrations/views/integrations.php:40
+msgid "Not installed"
 msgstr ""
 
 #: includes/integrations/views/integrations.php:38
 msgid "Inactive"
 msgstr ""
 
-#: includes/integrations/views/integrations.php:40
-msgid "Not installed"
+#: includes/integrations/views/integrations.php:36
+msgid "Active"
 msgstr ""
 
 #: includes/integrations/views/integrations.php:60
@@ -822,10 +822,6 @@ msgstr ""
 msgid "The table below shows your Mailchimp lists and their details. If you just applied changes to your Mailchimp lists, please use the following button to renew the cached lists configuration."
 msgstr ""
 
-#: includes/views/parts/lists-overview.php:19
-msgid "No lists were found in your Mailchimp account"
-msgstr ""
-
 #: includes/views/parts/lists-overview.php:22
 msgid "A total of %d lists were found in your Mailchimp account."
 msgstr ""
@@ -848,6 +844,10 @@ msgstr ""
 
 #: includes/views/parts/lists-overview.php:51
 msgid "Loading... Please wait."
+msgstr ""
+
+#: includes/views/parts/lists-overview.php:19
+msgid "No lists were found in your Mailchimp account"
 msgstr ""
 
 #: includes/forms/views/parts/add-fields-help.php:4, includes/forms/views/tabs/form-fields.php:10
@@ -900,10 +900,6 @@ msgstr ""
 
 #: includes/forms/views/tabs/form-appearance.php:6
 msgid "Basic"
-msgstr ""
-
-#: includes/forms/views/tabs/form-appearance.php:7
-msgid "Form Themes"
 msgstr ""
 
 #: includes/forms/views/tabs/form-appearance.php:8
