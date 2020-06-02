@@ -17,6 +17,7 @@ use Yoast\WP\SEO\WordPress\Wrapper;
  * Handles updates to the permalink_structure for the Indexables table.
  */
 class Indexable_Permalink_Watcher implements Integration_Interface {
+
 	/**
 	 * The post type helper.
 	 *
@@ -33,8 +34,6 @@ class Indexable_Permalink_Watcher implements Integration_Interface {
 
 	/**
 	 * Indexable_Permalink_Watcher constructor.
-	 *
-	 * @codeCoverageIgnore It sets a dependency.
 	 *
 	 * @param Post_Type_Helper $post_type The post type helper.
 	 */
@@ -103,9 +102,29 @@ class Indexable_Permalink_Watcher implements Integration_Interface {
 	}
 
 	/**
-	 * Retrieves a list with the public post types.
+	 * Resets the permalinks of the indexables.
 	 *
-	 * @codeCoverageIgnore
+	 * @param string      $type    The type of the indexable.
+	 * @param null|string $subtype The subtype. Can be null.
+	 */
+	public function reset_permalink_indexables( $type, $subtype = null ) {
+		$where = [ 'object_type' => $type ];
+
+		if ( $subtype ) {
+			$where['object_sub_type'] = $subtype;
+		}
+
+		Wrapper::get_wpdb()->update(
+			Model::get_table_name( 'Indexable' ),
+			[
+				'permalink' => null,
+			],
+			$where
+		);
+	}
+
+	/**
+	 * Retrieves a list with the public post types.
 	 *
 	 * @return array The post types.
 	 */
@@ -125,8 +144,6 @@ class Indexable_Permalink_Watcher implements Integration_Interface {
 	/**
 	 * Retrieves the taxonomies that belongs to the public post types.
 	 *
-	 * @codeCoverageIgnore
-	 *
 	 * @param array $post_types The post types to get taxonomies for.
 	 *
 	 * @return array The retrieved taxonomies.
@@ -141,29 +158,5 @@ class Indexable_Permalink_Watcher implements Integration_Interface {
 		$taxonomies = array_unique( $taxonomies );
 
 		return $taxonomies;
-	}
-
-	/**
-	 * Resets the permalinks of the indexables.
-	 *
-	 * @codeCoverageIgnore
-	 *
-	 * @param string      $type    The type of the indexable.
-	 * @param null|string $subtype The subtype. Can be null.
-	 */
-	protected function reset_permalink_indexables( $type, $subtype = null ) {
-		$where = [ 'object_type' => $type ];
-
-		if ( $subtype ) {
-			$where['object_sub_type'] = $subtype;
-		}
-
-		Wrapper::get_wpdb()->update(
-			Model::get_table_name( 'Indexable' ),
-			[
-				'permalink' => null,
-			],
-			$where
-		);
 	}
 }

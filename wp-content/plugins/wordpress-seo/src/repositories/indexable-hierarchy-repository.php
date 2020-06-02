@@ -11,7 +11,6 @@ use Yoast\WP\Lib\Model;
 use Yoast\WP\Lib\ORM;
 use Yoast\WP\SEO\Builders\Indexable_Hierarchy_Builder;
 use Yoast\WP\SEO\Models\Indexable;
-use Yoast\WP\SEO\Models\Indexable_Hierarchy;
 
 /**
  * Class Indexable_Hierarchy_Repository
@@ -54,7 +53,7 @@ class Indexable_Hierarchy_Repository {
 	 * @param int $ancestor_id  The ancestor id.
 	 * @param int $depth        The depth.
 	 *
-	 * @return bool|Model
+	 * @return bool Whether or not the ancestor was added succesfully.
 	 */
 	public function add_ancestor( $indexable_id, $ancestor_id, $depth ) {
 		$hierarchy = $this->query()->create( [
@@ -63,9 +62,7 @@ class Indexable_Hierarchy_Repository {
 			'depth'        => $depth,
 			'blog_id'      => \get_current_blog_id(),
 		] );
-		$hierarchy->save();
-
-		return $hierarchy;
+		return $hierarchy->save();
 	}
 
 	/**
@@ -73,25 +70,25 @@ class Indexable_Hierarchy_Repository {
 	 *
 	 * @param Indexable $indexable The indexable to get the ancestors for.
 	 *
-	 * @return Indexable_Hierarchy[] The ancestors.
+	 * @return int[] The indexable IDs of the ancestors in order of grandparent to child.
 	 */
 	public function find_ancestors( Indexable $indexable ) {
 		$ancestors = $this->query()
+			->select( 'ancestor_id' )
 			->where( 'indexable_id', $indexable->id )
 			->order_by_desc( 'depth' )
-			->find_many();
+			->find_array();
 
 		if ( ! empty( $ancestors ) ) {
-			return $ancestors;
+			return \array_map( function ( $ancestor ) {
+				return $ancestor['ancestor_id'];
+			}, $ancestors );
 		}
 
 		$indexable = $this->builder->build( $indexable );
-		$ancestors = $this->query()
-			->where( 'indexable_id', $indexable->id )
-			->order_by_desc( 'depth' )
-			->find_many();
-
-		return $ancestors;
+		return \array_map( function ( $indexable ) {
+			return $indexable->id;
+		}, $indexable->ancestors );
 	}
 
 	/**
