@@ -188,7 +188,7 @@ final class Analytics extends Module
 		$info['provides'] = array(
 			__( 'Audience overview', 'google-site-kit' ),
 			__( 'Top pages', 'google-site-kit' ),
-			__( 'Top acquisition sources', 'google-site-kit' ),
+			__( 'Top acquisition channels', 'google-site-kit' ),
 		);
 
 		return $info;
@@ -556,38 +556,6 @@ final class Analytics extends Module
 	}
 
 	/**
-	 * Returns the mapping between available datapoints and their services.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @return array Associative array of $datapoint => $service_identifier pairs.
-	 */
-	protected function get_datapoint_services() {
-		return array(
-			// GET / POST.
-			'connection'                   => '',
-			'account-id'                   => '',
-			'property-id'                  => '',
-			'profile-id'                   => '',
-			'internal-web-property-id'     => '',
-			'use-snippet'                  => '',
-			'tracking-disabled'            => '',
-			// GET.
-			'anonymize-ip'                 => '',
-			'goals'                        => 'analytics',
-			'accounts-properties-profiles' => 'analytics',
-			'properties-profiles'          => 'analytics',
-			'profiles'                     => 'analytics',
-			'tag-permission'               => '',
-			'report'                       => 'analyticsreporting',
-			// POST.
-			'create-property'              => 'analytics',
-			'create-profile'               => 'analytics',
-			'create-account-ticket'        => 'analyticsprovisioning',
-		);
-	}
-
-	/**
 	 * Gets map of datapoint to definition data for each.
 	 *
 	 * @since 1.9.0
@@ -595,33 +563,43 @@ final class Analytics extends Module
 	 * @return array Map of datapoints to their definitions.
 	 */
 	protected function get_datapoint_definitions() {
-		$map = parent::get_datapoint_definitions();
-
-		$map['POST:create-account-ticket'] = array_merge(
-			$map['POST:create-account-ticket'],
-			array(
+		return array(
+			'GET:account-id'                   => array( 'service' => '' ),
+			'POST:account-id'                  => array( 'service' => '' ),
+			'GET:accounts-properties-profiles' => array( 'service' => 'analytics' ),
+			'GET:anonymize-ip'                 => array( 'service' => '' ),
+			'GET:connection'                   => array( 'service' => '' ),
+			'POST:connection'                  => array( 'service' => '' ),
+			'POST:create-account-ticket'       => array(
+				'service'                => 'analyticsprovisioning',
 				'scopes'                 => array( 'https://www.googleapis.com/auth/analytics.provision' ),
 				'request_scopes_message' => __( 'You’ll need to grant Site Kit permission to create a new Analytics account on your behalf.', 'google-site-kit' ),
-			)
-		);
-
-		$map['POST:create-property'] = array_merge(
-			$map['POST:create-property'],
-			array(
-				'scopes'                 => array( 'https://www.googleapis.com/auth/analytics.edit' ),
-				'request_scopes_message' => __( 'You’ll need to grant Site Kit permission to create a new Analytics property on your behalf.', 'google-site-kit' ),
-			)
-		);
-
-		$map['POST:create-profile'] = array_merge(
-			$map['POST:create-profile'],
-			array(
+			),
+			'POST:create-profile'              => array(
+				'service'                => 'analytics',
 				'scopes'                 => array( 'https://www.googleapis.com/auth/analytics.edit' ),
 				'request_scopes_message' => __( 'You’ll need to grant Site Kit permission to create a new Analytics view on your behalf.', 'google-site-kit' ),
-			)
+			),
+			'POST:create-property'             => array(
+				'service'                => 'analytics',
+				'scopes'                 => array( 'https://www.googleapis.com/auth/analytics.edit' ),
+				'request_scopes_message' => __( 'You’ll need to grant Site Kit permission to create a new Analytics property on your behalf.', 'google-site-kit' ),
+			),
+			'GET:internal-web-property-id'     => array( 'service' => '' ),
+			'POST:internal-web-property-id'    => array( 'service' => '' ),
+			'GET:goals'                        => array( 'service' => 'analytics' ),
+			'GET:profile-id'                   => array( 'service' => '' ),
+			'POST:profile-id'                  => array( 'service' => '' ),
+			'GET:profiles'                     => array( 'service' => 'analytics' ),
+			'GET:properties-profiles'          => array( 'service' => 'analytics' ),
+			'GET:property-id'                  => array( 'service' => '' ),
+			'POST:property-id'                 => array( 'service' => '' ),
+			'GET:report'                       => array( 'service' => 'analyticsreporting' ),
+			'GET:tag-permission'               => array( 'service' => '' ),
+			'GET:tracking-disabled'            => array( 'service' => '' ),
+			'GET:use-snippet'                  => array( 'service' => '' ),
+			'POST:use-snippet'                 => array( 'service' => '' ),
 		);
-
-		return $map;
 	}
 
 	/**
@@ -876,23 +854,51 @@ final class Analytics extends Module
 					return true;
 				};
 			case 'GET:report':
-				$date_range = $data['dateRange'] ?: 'last-28-days';
+				$request_args = array();
 
-				$dimensions = array_map(
-					function ( $name ) {
-						$dimension = new Google_Service_AnalyticsReporting_Dimension();
-						$dimension->setName( $name );
+				if ( empty( $data['metrics'] ) ) {
+					/* translators: %s: Missing parameter name */
+					return new WP_Error( 'missing_required_param', sprintf( __( 'Request parameter is empty: %s.', 'google-site-kit' ), 'metrics' ), array( 'status' => 400 ) );
+				}
 
-						return $dimension;
-					},
-					array_filter( explode( ',', $data['dimensions'] ) )
-				);
-
-				$request_args         = compact( 'dimensions' );
-				$request_args['page'] = $data['url'];
+				if ( ! empty( $data['url'] ) ) {
+					$request_args['page'] = $data['url'];
+				}
 
 				if ( ! empty( $data['limit'] ) ) {
 					$request_args['row_limit'] = $data['limit'];
+				}
+
+				$dimensions = $data['dimensions'];
+				if ( ! empty( $dimensions ) && ( is_string( $dimensions ) || is_array( $dimensions ) ) ) {
+					if ( is_string( $dimensions ) ) {
+						$dimensions = explode( ',', $dimensions );
+					} elseif ( is_array( $dimensions ) && ! wp_is_numeric_array( $dimensions ) ) { // If single object is passed.
+						$dimensions = array( $dimensions );
+					}
+
+					$dimensions = array_filter(
+						array_map(
+							function ( $dimension_def ) {
+								$dimension = new Google_Service_AnalyticsReporting_Dimension();
+
+								if ( is_string( $dimension_def ) ) {
+									$dimension->setName( $dimension_def );
+								} elseif ( is_array( $dimension_def ) && ! empty( $dimension_def['name'] ) ) {
+									$dimension->setName( $dimension_def['name'] );
+								} else {
+									return null;
+								}
+
+								return $dimension;
+							},
+							array_filter( $dimensions )
+						)
+					);
+
+					if ( ! empty( $dimensions ) ) {
+						$request_args['dimensions'] = $dimensions;
+					}
 				}
 
 				$request = $this->create_analytics_site_data_request( $request_args );
@@ -901,17 +907,20 @@ final class Analytics extends Module
 					return $request;
 				}
 
-				$date_ranges = array(
-					$this->parse_date_range(
-						$date_range,
-						$data['compareDateRanges'] ? 2 : 1
-					),
-				);
+				$date_ranges = array();
+				$start_date  = $data['startDate'];
+				$end_date    = $data['endDate'];
+				if ( strtotime( $start_date ) && strtotime( $end_date ) ) {
+					$date_ranges[] = array( $start_date, $end_date );
+				} else {
+					$date_range    = $data['dateRange'] ?: 'last-28-days';
+					$date_ranges[] = $this->parse_date_range( $date_range, $data['compareDateRanges'] ? 2 : 1 );
 
-				// When using multiple date ranges, it changes the structure of the response,
-				// where each date range becomes an item in a list.
-				if ( ! empty( $data['multiDateRange'] ) ) {
-					$date_ranges[] = $this->parse_date_range( $date_range, 1, 1, true );
+					// When using multiple date ranges, it changes the structure of the response,
+					// where each date range becomes an item in a list.
+					if ( ! empty( $data['multiDateRange'] ) ) {
+						$date_ranges[] = $this->parse_date_range( $date_range, 1, 1, true );
+					}
 				}
 
 				$date_ranges = array_map(
@@ -927,63 +936,51 @@ final class Analytics extends Module
 				);
 				$request->setDateRanges( $date_ranges );
 
-				$metrics = array_map(
-					function ( $metric_def ) {
-						$metric_def = array_merge(
-							array(
-								'alias'      => '',
-								'expression' => '',
-							),
-							(array) $metric_def
-						);
-						$metric     = new Google_Service_AnalyticsReporting_Metric();
-						$metric->setAlias( $metric_def['alias'] );
-						$metric->setExpression( $metric_def['expression'] );
+				$metrics = $data['metrics'];
+				if ( is_string( $metrics ) || is_array( $metrics ) ) {
+					if ( is_string( $metrics ) ) {
+						$metrics = explode( ',', $data['metrics'] );
+					} elseif ( is_array( $metrics ) && ! wp_is_numeric_array( $metrics ) ) { // If single object is passed.
+						$metrics = array( $metrics );
+					}
 
-						return $metric;
-					},
-					(array) $data['metrics']
-				);
-				$request->setMetrics( $metrics );
+					$metrics = array_filter(
+						array_map(
+							function ( $metric_def ) {
+								$metric = new Google_Service_AnalyticsReporting_Metric();
+
+								if ( is_string( $metric_def ) ) {
+									$metric->setAlias( $metric_def );
+									$metric->setExpression( $metric_def );
+								} elseif ( is_array( $metric_def ) && ! empty( $metric_def['expression'] ) ) {
+									$metric->setExpression( $metric_def['expression'] );
+									$metric->setAlias( ! empty( $metric_def['alias'] ) ? $metric_def['alias'] : $metric_def['expression'] );
+								} else {
+									return null;
+								}
+
+								return $metric;
+							},
+							array_filter( $metrics )
+						)
+					);
+
+					if ( ! empty( $metrics ) ) {
+						$request->setMetrics( $metrics );
+					}
+				}
 
 				// Order by.
-				$orderby = array_map(
-					function ( $order_def ) {
-						$order_def = array_merge(
-							array(
-								'fieldName' => '',
-								'sortOrder' => '',
-							),
-							(array) $order_def
-						);
-						$order_by  = new Google_Service_AnalyticsReporting_OrderBy();
-						$order_by->setFieldName( $order_def['fieldName'] );
-						$order_by->setSortOrder( $order_def['sortOrder'] );
-
-						return $order_by;
-					},
-					(array) $data['orderby']
-				);
-				$request->setOrderBys( $orderby );
+				$orderby = $this->parse_reporting_orderby( $data['orderby'] );
+				if ( ! empty( $orderby ) ) {
+					$request->setOrderBys( $orderby );
+				}
 
 				// Batch reports requests.
 				$body = new Google_Service_AnalyticsReporting_GetReportsRequest();
 				$body->setReportRequests( array( $request ) );
 
 				return $this->get_analyticsreporting_service()->reports->batchGet( $body );
-			case 'POST:create-property':
-				if ( ! isset( $data['accountID'] ) ) {
-					return new WP_Error(
-						'missing_required_param',
-						/* translators: %s: Missing parameter name */
-						sprintf( __( 'Request parameter is empty: %s.', 'google-site-kit' ), 'accountID' ),
-						array( 'status' => 400 )
-					);
-				}
-				$property = new Google_Service_Analytics_Webproperty();
-				$property->setName( wp_parse_url( $this->context->get_reference_site_url(), PHP_URL_HOST ) );
-				$property->setWebsiteUrl( $this->context->get_reference_site_url() );
-				return $this->get_service( 'analytics' )->management_webproperties->insert( $data['accountID'], $property );
 			case 'POST:create-profile':
 				if ( ! isset( $data['accountID'] ) ) {
 					return new WP_Error(
@@ -1001,9 +998,26 @@ final class Analytics extends Module
 						array( 'status' => 400 )
 					);
 				}
+				$profile_name = trim( $data['profileName'] );
+				if ( empty( $profile_name ) ) {
+					$profile_name = __( 'All Web Site Data', 'google-site-kit' );
+				}
 				$profile = new Google_Service_Analytics_Profile();
-				$profile->setName( __( 'All Web Site Data', 'google-site-kit' ) );
+				$profile->setName( $profile_name );
 				return $profile = $this->get_service( 'analytics' )->management_profiles->insert( $data['accountID'], $data['propertyID'], $profile );
+			case 'POST:create-property':
+				if ( ! isset( $data['accountID'] ) ) {
+					return new WP_Error(
+						'missing_required_param',
+						/* translators: %s: Missing parameter name */
+						sprintf( __( 'Request parameter is empty: %s.', 'google-site-kit' ), 'accountID' ),
+						array( 'status' => 400 )
+					);
+				}
+				$property = new Google_Service_Analytics_Webproperty();
+				$property->setName( wp_parse_url( $this->context->get_reference_site_url(), PHP_URL_HOST ) );
+				$property->setWebsiteUrl( $this->context->get_reference_site_url() );
+				return $this->get_service( 'analytics' )->management_webproperties->insert( $data['accountID'], $property );
 			case 'GET:tag-permission':
 				return function() use ( $data ) {
 					if ( ! isset( $data['propertyID'] ) ) {
@@ -1015,18 +1029,12 @@ final class Analytics extends Module
 						);
 					}
 					$property_id = $data['propertyID'];
-					$account_id  = $this->parse_account_id( $property_id );
-					if ( empty( $account_id ) ) {
-						return new WP_Error(
-							'invalid_param',
-							__( 'The propertyID parameter is not a valid Analytics property ID.', 'google-site-kit' ),
-							array( 'status' => 400 )
-						);
-					}
-					return array(
-						'accountID'  => $account_id,
-						'propertyID' => $property_id,
-						'permission' => $this->has_access_to_property( $property_id, $account_id ),
+					return array_merge(
+						array(
+							'accountID'  => '', // Set the accountID to be an empty string and let has_access_to_property handle determining actual ID.
+							'propertyID' => $property_id,
+						),
+						$this->has_access_to_property( $property_id )
 					);
 				};
 			case 'GET:tracking-disabled':
@@ -1052,6 +1060,49 @@ final class Analytics extends Module
 		}
 
 		throw new Invalid_Datapoint_Exception();
+	}
+
+	/**
+	 * Parses the orderby value of the data request into an array of reporting orderby object instances.
+	 *
+	 * @since 1.13.1
+	 *
+	 * @param array|null $orderby Data request orderby value.
+	 * @return Google_Service_AnalyticsReporting_OrderBy[] An array of reporting orderby objects.
+	 */
+	protected function parse_reporting_orderby( $orderby ) {
+		if ( empty( $orderby ) || ! is_array( $orderby ) ) {
+			return array();
+		}
+
+		$results = array_map(
+			function ( $order_def ) {
+				$order_def = array_merge(
+					array(
+						'fieldName' => '',
+						'sortOrder' => '',
+					),
+					(array) $order_def
+				);
+
+				if ( empty( $order_def['fieldName'] ) || empty( $order_def['sortOrder'] ) ) {
+					return null;
+				}
+
+				$order_by = new Google_Service_AnalyticsReporting_OrderBy();
+				$order_by->setFieldName( $order_def['fieldName'] );
+				$order_by->setSortOrder( $order_def['sortOrder'] );
+
+				return $order_by;
+			},
+			// When just object is passed we need to convert it to an array of objects.
+			wp_is_numeric_array( $orderby ) ? $orderby : array( $orderby )
+		);
+
+		$results = array_filter( $results );
+		$results = array_values( $results );
+
+		return $results;
 	}
 
 	/**
@@ -1084,12 +1135,12 @@ final class Analytics extends Module
 					return array_merge( compact( 'accounts' ), $properties_profiles );
 				}
 
-				if ( ! empty( $data['existingPropertyID'] ) ) {
+				if ( $data['existingAccountID'] && $data['existingPropertyID'] ) {
 					// If there is an existing tag, pass it through to ensure only the existing tag is matched.
 					$properties_profiles = $this->get_data(
 						'properties-profiles',
 						array(
-							'accountID'          => $this->parse_account_id( $data['existingPropertyID'] ),
+							'accountID'          => $data['existingAccountID'],
 							'existingPropertyID' => $data['existingPropertyID'],
 						)
 					);
@@ -1346,28 +1397,62 @@ final class Analytics extends Module
 	 * @since 1.8.0 Simplified to return a boolean and require account ID.
 	 *
 	 * @param string $property_id Property found in the existing tag.
-	 * @param string $account_id  Account ID the property belongs to.
-	 * @return bool True if the user has access, false otherwise.
+	 * @return array A string representing the accountID and a boolean representing if the user has access to the property.
 	 */
-	protected function has_access_to_property( $property_id, $account_id ) {
-		if ( empty( $property_id ) || empty( $account_id ) ) {
-			return false;
+	protected function has_access_to_property( $property_id ) {
+		if ( empty( $property_id ) ) {
+			return array(
+				'permission' => false,
+			);
 		}
 
-		// Try to get properties for that account.
-		$properties = $this->get_data( 'properties-profiles', array( 'accountID' => $account_id ) );
-		if ( is_wp_error( $properties ) ) {
-			// No access to the account.
+		$account_id = $this->parse_account_id( $property_id );
+
+		/**
+		 * Helper method to check check if a given account
+		 * contains the property_id
+		 */
+		$has_property = function ( $account_id ) use ( $property_id ) {
+			$response = $this->get_data( 'properties-profiles', array( 'accountID' => $account_id ) );
+			if ( is_wp_error( $response ) ) {
+				return false;
+			}
+			foreach ( $response['properties'] as $property ) {
+				if ( $property->getId() === $property_id ) {
+					return true;
+				}
+			}
 			return false;
-		}
+		};
 
 		// Ensure there is access to the property.
-		foreach ( $properties['properties'] as $property ) {
-			if ( $property->getId() === $property_id ) {
-				return true;
+		if ( $has_property( $account_id ) ) {
+			return array(
+				'accountID'  => $account_id,
+				'permission' => true,
+			);
+		}
+
+		// Check all of the accounts for this user.
+		$user_accounts_properties_profiles = $this->get_data( 'accounts-properties-profiles' );
+		$user_account_ids                  = is_wp_error( $user_accounts_properties_profiles ) ? array() : wp_list_pluck( $user_accounts_properties_profiles['accounts'], 'id' );
+		foreach ( $user_account_ids as $user_account_id ) {
+			// Skip the inferred account id, that ship has sailed.
+			if ( $account_id === $user_account_id ) {
+				continue;
+			}
+			if ( $has_property( $user_account_id ) ) {
+				return array(
+					'accountID'  => $user_account_id,
+					'permission' => true,
+				);
 			}
 		}
-		return false;
+
+		// No property matched the account ID.
+		return array(
+			'permission' => false,
+		);
 	}
 
 	/**
